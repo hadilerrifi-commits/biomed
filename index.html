@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biomed</title>
+<style>
+/* ==========================================================
+   Biomed - Design system
+   Palette rose personnelle + plum foncé
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --rose-deep:  #B3184F;
+    --rose-mid:   #E0567F;
+    --rose-soft:  #F7C6D9;
+    --rose-pale:  #FFF5F8;
+    --plum-dark:  #2E1A24;
+    --plum-mid:   #452A38;
+    --ink:        #3A2530;
+    --ink-light:  #7A6270;
+    --white:      #FFFFFF;
+    --border:     #F0DDE5;
+
+    --sage:   #6E8F72;
+    --sage-bg:#EAF2EB;
+    --amber:  #D99A45;
+    --amber-bg:#FBF0DF;
+    --red:    #B23A48;
+    --red-bg: #FBE7E9;
+
+    --radius: 12px;
+    --shadow: 0 2px 10px rgba(46, 26, 36, 0.06);
+    --shadow-lg: 0 8px 28px rgba(46, 26, 36, 0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--rose-pale);
+    color: var(--ink);
+    font-size: 14.5px;
+    line-height: 1.55;
+}
+
+h1, h2, h3, h4, .display {
+    font-family: 'Fraunces', serif;
+    color: var(--plum-dark);
+    font-weight: 600;
+}
+
+code, .mono, .data { font-family: 'JetBrains Mono', monospace; }
+
+a { color: var(--rose-deep); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------------- Layout ---------------- */
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+    width: 240px;
+    background: var(--plum-dark);
+    color: #F3E3EA;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebar .brand {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+.sidebar .brand-sub {
+    font-size: 11px;
+    color: var(--rose-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 28px;
+}
+
+.sidebar nav { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+
+.sidebar nav a {
+    color: #E7CBD6;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.sidebar nav a:hover { background: rgba(255,255,255,0.06); text-decoration: none; }
+.sidebar nav a.active { background: var(--rose-deep); color: #fff; }
+
+.sidebar .user-box {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 16px;
+    margin-top: 16px;
+    font-size: 12.5px;
+}
+.sidebar .user-box .name { color: #fff; font-weight: 600; }
+.sidebar .user-box .role { color: var(--rose-soft); }
+.sidebar .user-box a.logout { color: #E7CBD6; font-size: 12px; }
+
+.main { flex: 1; min-width: 0; }
+
+.topbar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.topbar h1 { font-size: 22px; }
+.topbar .breadcrumb { font-size: 13px; color: var(--ink-light); }
+
+.content { padding: 28px; }
+
+/* ---------------- Cards / stats ---------------- */
+.grid { display: grid; gap: 18px; }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1100px) { .grid-4, .grid-3 { grid-template-columns: repeat(2,1fr); } }
+
+.card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.stat-card .label { font-size: 12.5px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.04em; }
+.stat-card .value { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: var(--plum-dark); margin-top: 4px; }
+.stat-card .sub { font-size: 12.5px; color: var(--ink-light); margin-top: 4px; }
+
+/* ---------------- Tables ---------------- */
+table { width: 100%; border-collapse: collapse; background: #fff; }
+thead th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-light);
+    border-bottom: 2px solid var(--border);
+    padding: 10px 14px;
+}
+tbody td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+tbody tr:hover { background: var(--rose-pale); }
+
+.table-wrap { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+
+/* ---------------- Badges ---------------- */
+.badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
+.badge-service  { background: var(--sage-bg); color: var(--sage); }
+.badge-panne    { background: var(--red-bg); color: var(--red); }
+.badge-maint    { background: var(--amber-bg); color: var(--amber); }
+.badge-hs       { background: #EDE3E7; color: var(--ink-light); }
+.badge-rose     { background: var(--rose-soft); color: var(--rose-deep); }
+
+.risk-low    { color: var(--sage); font-weight: 600; }
+.risk-medium { color: var(--amber); font-weight: 600; }
+.risk-high   { color: var(--red);  font-weight: 600; }
+
+.risk-bar { height: 6px; border-radius: 4px; background: var(--border); overflow: hidden; width: 100px; }
+.risk-bar span { display: block; height: 100%; background: var(--rose-deep); }
+
+/* ---------------- Buttons ---------------- */
+.btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 16px; border-radius: 8px; font-size: 13.5px; font-weight: 600;
+    border: 1px solid transparent; cursor: pointer;
+}
+.btn-primary { background: var(--rose-deep); color: #fff; }
+.btn-primary:hover { background: #941140; text-decoration: none; }
+.btn-outline { background: #fff; border-color: var(--border); color: var(--ink); }
+.btn-outline:hover { border-color: var(--rose-deep); color: var(--rose-deep); text-decoration: none; }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+.btn-danger { background: var(--red); color: #fff; }
+
+/* ---------------- Forms ---------------- */
+label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; color: var(--ink); }
+input, select, textarea {
+    width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px;
+    font-family: inherit; font-size: 13.5px; background: #fff; color: var(--ink);
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--rose-deep); }
+.field { margin-bottom: 14px; }
+
+/* ---------------- Checklist ---------------- */
+.checklist-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 14px; border-bottom: 1px solid var(--border);
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-item input[type=checkbox] { width: auto; margin-top: 3px; }
+.checklist-item .tag-qualif {
+    font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    background: var(--rose-soft); color: var(--rose-deep); padding: 2px 7px; border-radius: 5px; margin-left: 8px;
+}
+
+/* ---------------- Login ---------------- */
+.login-wrap { min-height: 100vh; display: flex; }
+.login-hero {
+    flex: 1.1; background: linear-gradient(160deg, var(--plum-dark), #4A1F35);
+    color: #fff; padding: 60px; display: flex; flex-direction: column; justify-content: center;
+}
+.login-hero h1 { font-family: 'Fraunces', serif; font-size: 34px; color: #fff; margin-bottom: 16px; }
+.login-hero p { color: var(--rose-soft); max-width: 380px; }
+.login-hero ul { margin-top: 30px; list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.login-hero li { color: #F3E3EA; font-size: 14px; }
+
+.login-form-side { flex: 1; display: flex; align-items: center; justify-content: center; background: #fff; }
+.login-form { width: 320px; }
+.login-form h2 { margin-bottom: 6px; }
+.login-form .sub { color: var(--ink-light); font-size: 13px; margin-bottom: 24px; }
+
+/* ---------------- Flash messages ---------------- */
+.flash { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13.5px; }
+.flash-success { background: var(--sage-bg); color: var(--sage); }
+.flash-error   { background: var(--red-bg); color: var(--red); }
+
+/* ---------------- Misc ---------------- */
+.muted { color: var(--ink-light); }
+.section-title { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-light); margin: 22px 0 10px; }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.tabs a { padding: 10px 16px; font-size: 13.5px; font-weight: 600; color: var(--ink-light); border-bottom: 2px solid transparent; }
+.tabs a.active { color: var(--rose-deep); border-color: var(--rose-deep); }
+
+
+/* ---------------- Ajouts version statique ---------------- */
+.hero-home { background: var(--plum-dark); color: #F3E3EA; border-radius: var(--radius); padding: 36px 32px; margin-bottom: 8px; }
+.hero-home h1 { color: #fff; font-size: 44px; margin-bottom: 10px; }
+.hero-home p { color: var(--rose-soft); max-width: 680px; margin-bottom: 8px; }
+.hero-home .muted { color: #cdb3c0; }
+
+.timeline { list-style: none; border-left: 2px solid var(--rose-soft); padding-left: 18px; display: flex; flex-direction: column; gap: 14px; }
+.timeline li { position: relative; }
+.timeline li::before { content: ''; position: absolute; left: -24px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--rose-deep); }
+.timeline li b { display: block; color: var(--plum-dark); font-size: 13px; }
+
+.log { background: var(--plum-dark); color: #F3E3EA; font-family: 'JetBrains Mono', monospace, monospace; font-size: 12px; line-height: 1.7; padding: 16px 18px; border-radius: var(--radius); max-height: 520px; overflow: auto; }
+
+.sidebar .brand-link { color: #fff; text-decoration: none; }
+.sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+
+@media (max-width: 800px) {
+    .app { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: static; padding: 14px 12px; }
+    .sidebar .brand-sub { margin-bottom: 10px; }
+    .sidebar nav { flex-direction: row; overflow-x: auto; gap: 6px; padding-bottom: 4px; }
+    .sidebar nav a { white-space: nowrap; flex-shrink: 0; padding: 8px 12px; }
+    .content { padding: 16px; }
+    .topbar { padding: 14px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    .hero-home { padding: 24px 18px; }
+    .hero-home h1 { font-size: 34px; }
+    .tabs { overflow-x: auto; }
+    .tabs a { white-space: nowrap; }
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><a class="brand-link" href="#/">Biomed</a></div>
+    <div class="brand-sub">Suivi du parc biomédical</div>
+    <nav id="nav"></nav>
+  </aside>
+  <div class="main" id="view"></div>
+</div>
+<script>
+var DATA = {"services": [{"id": 1, "nom": "Imagerie médicale", "description": "Radiologie conventionnelle, interventionnelle, échographie, scanner, IRM, mammographie"}, {"id": 2, "nom": "Radiothérapie", "description": "Accélérateur linéaire et curiethérapie HDR"}, {"id": 3, "nom": "Hépato-gastro-entérologie", "description": "Endoscopie digestive diagnostique et interventionnelle"}, {"id": 4, "nom": "Bloc opératoire", "description": "Chirurgie, anesthésie, fluides médicaux"}, {"id": 5, "nom": "Médecine nucléaire", "description": "Scintigraphie SPECT/CT"}, {"id": 6, "nom": "Anatomie pathologique et biologie moléculaire", "description": "Histologie et séquençage NGS"}, {"id": 7, "nom": "Réanimation", "description": "Surveillance et soutien des fonctions vitales"}, {"id": 8, "nom": "Stérilisation", "description": "Retraitement des dispositifs médicaux réutilisables"}, {"id": 9, "nom": "Pharmacie", "description": "Armoires pharmaceutiques automatisées"}], "equipements": [{"id": 1, "nom": "IRM", "service_id": 1, "fabricant": "Philips", "modele": null, "numero_serie": "IRM-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Imagerie par résonance magnétique.", "fonctionnement_detail": "Utilise un champ magnétique puissant et des ondes radiofréquence pour faire résonner les protons d'hydrogène des tissus ; le signal émis lors du retour à l'équilibre est capté et reconstruit en image.", "intensite_utilisation": "elevee"}, {"id": 2, "nom": "Scanner-simulateur", "service_id": 1, "fabricant": "Siemens", "modele": null, "numero_serie": "SCAN-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Scanner dédié à la planification en radiothérapie.", "fonctionnement_detail": "Acquiert des coupes tomodensitométriques du patient en position de traitement, utilisées pour définir les volumes cibles et calculer la dosimétrie avant l'accélérateur linéaire.", "intensite_utilisation": "elevee"}, {"id": 3, "nom": "Mammographe", "service_id": 1, "fabricant": null, "modele": null, "numero_serie": "MAMMO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Détection et caractérisation des lésions mammaires.", "fonctionnement_detail": "Émet un faisceau de rayons X de basse énergie à travers le sein comprimé pour maximiser le contraste entre tissus glandulaire, graisseux et lésionnel.", "intensite_utilisation": "elevee"}, {"id": 4, "nom": "Système de biopsie mammaire guidée EnCor Enspire", "service_id": 1, "fabricant": "Bard/BD", "modele": "EnCor Enspire", "numero_serie": "BIOP-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Biopsie mammaire assistée par aspiration sous guidage stéréotaxique.", "fonctionnement_detail": "Prélève automatiquement des échantillons tissulaires via une aiguille couplée à un système d'aspiration, guidée par imagerie stéréotaxique pour cibler précisément la lésion.", "intensite_utilisation": "moyenne"}, {"id": 5, "nom": "Échographe", "service_id": 1, "fabricant": null, "modele": null, "numero_serie": "ECHO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Imagerie par ultrasons.", "fonctionnement_detail": "Émet des ultrasons via une sonde piézoélectrique ; l'écho renvoyé par les interfaces tissulaires est capté et converti en image en temps réel.", "intensite_utilisation": "elevee"}, {"id": 6, "nom": "Accélérateur linéaire (LINAC)", "service_id": 2, "fabricant": null, "modele": null, "numero_serie": "LINAC-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Irradiation externe en radiothérapie.", "fonctionnement_detail": "Accélère des électrons puis les projette sur une cible pour produire un faisceau de rayons X de haute énergie, façonné par un collimateur multilames pour irradier précisément le volume tumoral.", "intensite_utilisation": "elevee"}, {"id": 7, "nom": "Unité de curiethérapie HDR", "service_id": 2, "fabricant": null, "modele": null, "numero_serie": "CURIE-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Curiethérapie à haut débit de dose.", "fonctionnement_detail": "Déplace une source radioactive scellée (Iridium-192) via des cathéters de transfert jusqu'aux applicateurs positionnés dans ou à proximité de la tumeur, pour une irradiation de très haute précision à courte distance.", "intensite_utilisation": "moyenne"}, {"id": 8, "nom": "Endoscope souple", "service_id": 3, "fabricant": null, "modele": null, "numero_serie": "ENDO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Exploration visuelle et gestes thérapeutiques digestifs.", "fonctionnement_detail": "Dispositif flexible intégrant caméra, éclairage et canaux opérateurs ; selon la variante (gastroscope, coloscope, écho-endoscope) explore l'œsophage/estomac, le côlon, ou associe une sonde échographique pour évaluer l'extension tumorale.", "intensite_utilisation": "elevee"}, {"id": 9, "nom": "Colonne d'endoscopie digestive", "service_id": 3, "fabricant": "Fujifilm", "modele": null, "numero_serie": "COLENDO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Pilotage centralisé des examens endoscopiques.", "fonctionnement_detail": "Regroupe processeur vidéo, source lumineuse, module d'insufflation (air/CO₂) et système d'irrigation-aspiration, synchronisés pour l'exploration digestive.", "intensite_utilisation": "elevee"}, {"id": 10, "nom": "Laveur-désinfecteur d'endoscopes", "service_id": 3, "fabricant": "Choyang", "modele": "CYW-DUO", "numero_serie": "LDE-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Nettoyage et désinfection de haut niveau des endoscopes souples.", "fonctionnement_detail": "Cycle automatisé : détergent enzymatique, désinfectant de haut niveau, eau purifiée et air filtré injectés successivement dans les canaux internes, avec traçabilité de chaque cycle.", "intensite_utilisation": "elevee"}, {"id": 11, "nom": "Générateur d'électrochirurgie", "service_id": 3, "fabricant": "Erbe", "modele": "VIO 3 / APC 3", "numero_serie": "ELEC-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Coupe et coagulation lors des gestes endoscopiques interventionnels.", "fonctionnement_detail": "Délivre un courant haute fréquence (~500 kHz) pour couper ou coaguler les tissus ; le module APC 3 permet une coagulation sans contact par jet de gaz argon ionisé.", "intensite_utilisation": "moyenne"}, {"id": 12, "nom": "Table d'opération", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "TABLE-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Positionnement du patient au bloc opératoire.", "fonctionnement_detail": "Plateau divisé en sections indépendantes actionnées par vérins/moteurs électriques, permettant de reconstituer les positions chirurgicales classiques (dorsale, Trendelenburg, gynécologique...).", "intensite_utilisation": "elevee"}, {"id": 13, "nom": "Scialytique", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "SCIA-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Éclairage opératoire.", "fonctionnement_detail": "Source LED concentrée par réflecteurs paraboliques ; sur les modèles multifocaux, plusieurs faisceaux convergent pour effacer les ombres portées par les mains du chirurgien.", "intensite_utilisation": "elevee"}, {"id": 14, "nom": "Bistouri électrique", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "BISTO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Section et coagulation tissulaire.", "fonctionnement_detail": "Utilise un courant haute fréquence (>200 kHz, ~500 kHz) pour vaporiser l'eau intracellulaire (coupe) ou dénaturer les protéines (coagulation), en montage monopolaire ou bipolaire.", "intensite_utilisation": "elevee"}, {"id": 15, "nom": "Amplificateur de brillance", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "AMPBR-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Fluoroscopie peropératoire.", "fonctionnement_detail": "Convertit un faisceau de rayons X en image visible amplifiée (jusqu'à 10 000 fois) via deux écrans fluorescents et un tube sous vide, retransmise en temps réel sur moniteur.", "intensite_utilisation": "moyenne"}, {"id": 16, "nom": "Défibrillateur (bloc opératoire)", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "DEFIB-BLOC-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Choc électrique contrôlé en cas de trouble grave du rythme cardiaque.", "fonctionnement_detail": "Délivre un choc électrique pour resynchroniser le cœur ; fait aussi office de moniteur ECG. Le choix des électrodes dépend de l'âge du patient.", "intensite_utilisation": "faible"}, {"id": 17, "nom": "Gamma-caméra hybride SPECT/CT", "service_id": 5, "fabricant": "Siemens", "modele": "Symbia Pro.specta", "numero_serie": "GAMMA-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Scintigraphie fonctionnelle couplée à un scanner anatomique.", "fonctionnement_detail": "Deux têtes de détection captent le rayonnement gamma émis par un traceur radioactif injecté (ex. Technétium-99m) ; un module CT intégré produit l'image anatomique, fusionnée avec l'image fonctionnelle.", "intensite_utilisation": "moyenne"}, {"id": 18, "nom": "Automate de traitement des tissus", "service_id": 6, "fabricant": null, "modele": "ILSA", "numero_serie": "TISSU-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Préparation des prélèvements avant inclusion.", "fonctionnement_detail": "Déshydrate progressivement le tissu, le clarifie puis l'imprègne de paraffine liquide pour le rendre suffisamment ferme pour la coupe au microtome.", "intensite_utilisation": "elevee"}, {"id": 19, "nom": "Microtome rotatif", "service_id": 6, "fabricant": "Leica", "modele": null, "numero_serie": "MICRO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Coupe des blocs de paraffine.", "fonctionnement_detail": "Tranche le bloc en rubans de 3 à 5 µm, une épaisseur permettant à la lumière du microscope de traverser une seule couche de cellules.", "intensite_utilisation": "elevee"}, {"id": 20, "nom": "Automate de coloration", "service_id": 6, "fabricant": null, "modele": null, "numero_serie": "COLOR-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Coloration des lames histologiques.", "fonctionnement_detail": "Applique la coloration Hématoxyline-Éosine-Safran, rendant visibles noyaux, cytoplasmes et structures cellulaires pour le diagnostic.", "intensite_utilisation": "elevee"}, {"id": 21, "nom": "Ion GeneStudio S5 Plus", "service_id": 6, "fabricant": "Thermo Fisher (Ion Torrent)", "modele": "S5 Plus", "numero_serie": "NGS-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Séquenceur de nouvelle génération (NGS).", "fonctionnement_detail": "Détecte l'ion hydrogène libéré à chaque incorporation de nucléotide sur le brin d'ADN en cours de lecture, pour reconstituer la séquence base après base (principe électrochimique).", "intensite_utilisation": "moyenne"}, {"id": 22, "nom": "Lit de réanimation", "service_id": 7, "fabricant": "Linet", "modele": null, "numero_serie": "LIT-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Support motorisé haute technologie pour patients en réanimation.", "fonctionnement_detail": "Réglable en hauteur/inclinaison, matelas anti-escarres à cellules pneumatiques alternées, commande CPR de mise à plat d'urgence, pesée électronique intégrée.", "intensite_utilisation": "elevee"}, {"id": 23, "nom": "Respirateur de réanimation", "service_id": 7, "fabricant": null, "modele": null, "numero_serie": "RESPI-REA-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Ventilation assistée longue durée.", "fonctionnement_detail": "Fonctionne en circuit ouvert (gaz frais à chaque cycle, sans recyclage), avec des modes ventilatoires nombreux et évolutifs adaptés à un état respiratoire instable et prolongé.", "intensite_utilisation": "elevee"}, {"id": 24, "nom": "Laveur-désinfecteur", "service_id": 8, "fabricant": "Steris", "modele": null, "numero_serie": "LAVDES-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Première étape de la stérilisation (zone sale).", "fonctionnement_detail": "Enchaîne automatiquement prélavage, lavage au détergent, rinçage, désinfection thermique et séchage via des bras de lavage et buses d'aspersion.", "intensite_utilisation": "elevee"}, {"id": 25, "nom": "Autoclave", "service_id": 8, "fabricant": "CISA", "modele": null, "numero_serie": "AUTOCL-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Stérilisation à la vapeur d'eau saturée sous pression.", "fonctionnement_detail": "Mise sous vide initiale, injection de vapeur à haute température, temps de maintien pour détruire tout micro-organisme, puis séchage avant ouverture de la porte.", "intensite_utilisation": "elevee"}, {"id": 26, "nom": "Stérilisateur à plasma", "service_id": 8, "fabricant": "Steelco", "modele": null, "numero_serie": "PLASMA-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Stérilisation basse température pour dispositifs thermosensibles.", "fonctionnement_detail": "Vaporise du peroxyde d'hydrogène transformé en plasma, un état réactif qui détruit les micro-organismes sans exposer l'instrument à la chaleur.", "intensite_utilisation": "elevee"}, {"id": 27, "nom": "Armoire pharmaceutique automatisée", "service_id": 9, "fabricant": "Stockart", "modele": null, "numero_serie": "APS-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Stockage et dispensation sécurisée des médicaments et dispositifs.", "fonctionnement_detail": "Authentification de l'utilisateur, déverrouillage du seul compartiment prescrit, traçabilité complète de chaque mouvement (entrée, sortie, tentative refusée) et vidéosurveillance des prélèvements.", "intensite_utilisation": "elevee"}, {"id": 28, "nom": "Poste de macroscopie", "service_id": 6, "fabricant": null, "modele": null, "numero_serie": "MACRO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Examen visuel et découpe des prélèvements avant inclusion.", "fonctionnement_detail": "Station où le prélèvement est mesuré, examiné puis découpé pour sélectionner les zones à analyser, dans des conditions garantissant la sécurité de l'échantillon et de l'opérateur.", "intensite_utilisation": "elevee"}, {"id": 29, "nom": "Microscope (biologie moléculaire)", "service_id": 6, "fabricant": null, "modele": null, "numero_serie": "MICROSC-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Observation des lames et contrôle en laboratoire de biologie moléculaire.", "fonctionnement_detail": "Système optique grossissant permettant l'observation directe des échantillons et le contrôle visuel de certaines étapes de préparation.", "intensite_utilisation": "elevee"}, {"id": 30, "nom": "Table de radiologie conventionnelle", "service_id": 1, "fabricant": null, "modele": null, "numero_serie": "RADIOSTD-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Radiographie standard par rayons X.", "fonctionnement_detail": "Le tube à rayons X, suspendu au plafond et mobile, produit le rayonnement ; le patient est positionné sur la table ou au bucky mural (examens debout) ; le détecteur numérique ou la cassette CR capte les rayons après traversée du corps, numérisés par le lecteur CR puis visualisés sur la console d'acquisition. Les os, plus denses, apparaissent en blanc ; les tissus mous en nuances de gris.", "intensite_utilisation": "elevee"}, {"id": 31, "nom": "Arceau de radiologie interventionnelle", "service_id": 1, "fabricant": null, "modele": null, "numero_serie": "RADIOINT-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Actes diagnostiques ou thérapeutiques guidés par imagerie.", "fonctionnement_detail": "Guide en temps réel des gestes peu invasifs (biopsies, embolisations, drainages, ablations) par rayons X, réduisant le temps de récupération et les risques par rapport à la chirurgie classique.", "intensite_utilisation": "moyenne"}, {"id": 32, "nom": "Testeur d'étanchéité manuel", "service_id": 3, "fabricant": "Olympus", "modele": null, "numero_serie": "TEST-ETANCH-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Contrôle d'étanchéité de l'endoscope avant lavage.", "fonctionnement_detail": "Met l'endoscope sous pression pour détecter toute fuite au niveau de la gaine externe ; une chute de pression signale une perte d'étanchéité. Un endoscope non étanche ne doit jamais être immergé dans le laveur-désinfecteur.", "intensite_utilisation": "elevee"}, {"id": 33, "nom": "Station d'anesthésie-réanimation (endoscopie)", "service_id": 3, "fabricant": null, "modele": null, "numero_serie": "ANESTH-ENDO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Ventilation assistée pendant les endoscopies sous sédation.", "fonctionnement_detail": "Administre oxygène, air médical et agents anesthésiques volatils via vaporisateurs ; moniteurs multiparamétriques associés pour ECG, pression artérielle, SpO₂ et fréquence respiratoire.", "intensite_utilisation": "moyenne"}, {"id": 34, "nom": "Aspirateur chirurgical", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "ASPIR-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Évacuation du sang, sécrétions et débris du champ opératoire.", "fonctionnement_detail": "Générateur de vide (pompe intégrée ou vide central) relié à une sonde d'aspiration à usage unique et à des bocaux de recueil gradués ; filtre antibactérien empêchant toute remontée vers le moteur.", "intensite_utilisation": "elevee"}, {"id": 35, "nom": "Colonne de cœlioscopie", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "COELIO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Pilotage centralisé de la chirurgie mini-invasive.", "fonctionnement_detail": "Regroupe processeur vidéo, caméra, source lumineuse, moniteur et insufflateur de CO₂ sur un même chariot ; le CO₂ distend la cavité abdominale pour créer l'espace de travail du chirurgien.", "intensite_utilisation": "moyenne"}, {"id": 36, "nom": "Laryngoscope", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "LARYNGO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Visualisation du larynx lors de l'induction anesthésique.", "fonctionnement_detail": "Guide la pose du tube d'intubation indispensable à la ventilation du patient sous anesthésie générale.", "intensite_utilisation": "elevee"}, {"id": 37, "nom": "Moniteur de surveillance cardio-respiratoire (bloc)", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "MONIT-BLOC-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Suivi continu des paramètres vitaux au bloc.", "fonctionnement_detail": "Surveille en continu l'ECG (fréquence cardiaque, arythmies), la fréquence respiratoire (impédance thoracique), la SpO₂ (oxymétrie de pouls) et la pression artérielle (méthode oscillométrique).", "intensite_utilisation": "elevee"}, {"id": 38, "nom": "Armoire de Traitement d'Air (ATA)", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "ATA-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Traitement local de l'air de la salle d'opération.", "fonctionnement_detail": "Cycle en 5 étapes : reprise de l'air vicié, pré-filtration (G4 puis F9), injection d'air neuf traité par la CTA, conditionnement thermique, puis soufflage en flux laminaire à travers des filtres HEPA H14 au-dessus de la table.", "intensite_utilisation": "elevee"}, {"id": 39, "nom": "Station d'inclusion", "service_id": 6, "fabricant": "Leica", "modele": null, "numero_serie": "INCLUSION-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Enrobage du tissu imprégné dans un bloc de paraffine.", "fonctionnement_detail": "Noie le tissu préalablement déshydraté et imprégné de paraffine dans un bloc, en veillant à son orientation pour éviter des coupes obliques ou incomplètes au microtome.", "intensite_utilisation": "elevee"}, {"id": 40, "nom": "Plaque froide", "service_id": 6, "fabricant": "Leica", "modele": null, "numero_serie": "PLAQFROIDE-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Durcissement rapide du bloc de paraffine.", "fonctionnement_detail": "Accélère la solidification du bloc par refroidissement rapide, donnant un bloc homogène sans zone molle susceptible de déchirer la lame lors de la découpe.", "intensite_utilisation": "elevee"}, {"id": 41, "nom": "Bain-marie de flottation", "service_id": 6, "fabricant": null, "modele": null, "numero_serie": "BAINMARIE-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Mise à plat des coupes histologiques avant dépôt sur lame.", "fonctionnement_detail": "Détend les coupes froissées sortant du microtome, à température contrôlée, et efface les plis avant leur dépôt définitif sur la lame de verre.", "intensite_utilisation": "elevee"}, {"id": 42, "nom": "Étuve de séchage", "service_id": 6, "fabricant": null, "modele": null, "numero_serie": "ETUVE-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Fixation de la coupe sur la lame.", "fonctionnement_detail": "La chaleur fixe la coupe à la surface de la lame ; sans cette étape, le tissu risquerait de se détacher au premier bain de coloration.", "intensite_utilisation": "elevee"}, {"id": 43, "nom": "Ion Chef System", "service_id": 6, "fabricant": "Thermo Fisher (Ion Torrent)", "modele": null, "numero_serie": "IONCHEF-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Préparation automatisée des librairies avant séquençage NGS.", "fonctionnement_detail": "Automatise la préparation des librairies génétiques, l'enrichissement des matrices et le chargement des puces - des étapes manuellement délicates que l'automatisation fiabilise.", "intensite_utilisation": "moyenne"}, {"id": 44, "nom": "SeqStudio Genetic Analyzer", "service_id": 6, "fabricant": "Applied Biosystems", "modele": null, "numero_serie": "SEQSTUDIO-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Séquençage ciblé rapide, en complément de la chaîne Ion Torrent.", "fonctionnement_detail": "Permet un séquençage plus rapide pour des analyses ciblées et moins volumineuses, sans mobiliser toute la chaîne Ion Torrent.", "intensite_utilisation": "moyenne"}, {"id": 45, "nom": "Pousse-seringue électrique", "service_id": 7, "fabricant": null, "modele": null, "numero_serie": "PSE-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Administration de médicaments à débit constant.", "fonctionnement_detail": "Pousse lentement et précisément le piston d'une seringue reliée à la voie veineuse ; plusieurs unités fonctionnent simultanément par lit, chacune dédiée à un traitement (sédatif, antalgique, catécholamine...).", "intensite_utilisation": "elevee"}, {"id": 46, "nom": "Moniteur de surveillance cardio-respiratoire (réanimation)", "service_id": 7, "fabricant": null, "modele": null, "numero_serie": "MONIT-REA-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Suivi continu des paramètres vitaux, sur plusieurs jours.", "fonctionnement_detail": "Suit en continu ECG, fréquence respiratoire, SpO₂ et pression artérielle, avec seuils d'alarme réglés individuellement pour chaque patient.", "intensite_utilisation": "elevee"}, {"id": 47, "nom": "Défibrillateur (réanimation)", "service_id": 7, "fabricant": null, "modele": null, "numero_serie": "DEFIB-REA-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Choc électrique contrôlé en cas de trouble grave du rythme cardiaque.", "fonctionnement_detail": "Reste à portée immédiate de chaque lit ; fait aussi office de moniteur ECG. Même principe que le défibrillateur du bloc opératoire.", "intensite_utilisation": "faible"}, {"id": 48, "nom": "Thermo-soudeuse", "service_id": 8, "fabricant": null, "modele": null, "numero_serie": "THERMOSOUD-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Conditionnement des instruments avant stérilisation.", "fonctionnement_detail": "Referme les gaines/sachets de stérilisation par une résistance chauffante qui scelle la gaine au passage d'une barre de soudure, protégeant l'instrument de toute recontamination jusqu'à son utilisation.", "intensite_utilisation": "elevee"}, {"id": 49, "nom": "Électrocardiographe (ECG)", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "ECG-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Enregistrement de l'activité électrique du cœur, impression sur papier thermique.", "fonctionnement_detail": "Détecte l'activité électrique cardiaque via des électrodes et l'imprime en temps réel ; utilise une impression thermique, ce qui nécessite du papier thermique spécifique (et non du papier ordinaire).", "intensite_utilisation": "moyenne"}, {"id": 50, "nom": "Mini défibrillateur", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "MINIDEFIB-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Défibrillateur portable pour intervention rapide.", "fonctionnement_detail": "Version compacte et portable du défibrillateur ; délivre un choc électrique contrôlé, avec une autonomie sur batterie à surveiller de près vu son usage d'urgence.", "intensite_utilisation": "faible"}, {"id": 51, "nom": "Débitmètre", "service_id": 7, "fabricant": null, "modele": null, "numero_serie": "DEBITMETRE-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Mesure et contrôle du débit d'administration d'un liquide (perfusions).", "fonctionnement_detail": "Contrôle avec précision le débit d'un liquide perfusé afin de garantir une délivrance sûre et conforme au traitement prescrit ; intègre une porte de chargement dont l'intégrité (fermeture, détection) conditionne le bon fonctionnement.", "intensite_utilisation": "elevee"}, {"id": 52, "nom": "Scanner de spécimen Faxitron OR", "service_id": 4, "fabricant": null, "modele": null, "numero_serie": "FAXITRON-BM-01", "date_installation": null, "date_fin_garantie": null, "statut": "en_service", "description_courte": "Radiographie de pièces opératoires au bloc, pour vérification des marges d'exérèse.", "fonctionnement_detail": "Réalise l'imagerie par rayons X d'une pièce chirurgicale directement en salle d'opération, permettant de vérifier en temps réel l'exérèse complète de la lésion sans attendre l'analyse anatomopathologique différée.", "intensite_utilisation": "moyenne"}], "parametres": [{"equipement_id": 1, "parametre": "Niveau d'hélium", "unite": "%", "valeur_reference": "> 70", "derniere_valeur_mesuree": "78", "conforme": 1}, {"equipement_id": 1, "parametre": "Homogénéité du champ magnétique", "unite": "ppm", "valeur_reference": "< 1", "derniere_valeur_mesuree": "0.6", "conforme": 1}, {"equipement_id": 6, "parametre": "Débit de dose (output)", "unite": "cGy/UM", "valeur_reference": "référence ± 2%", "derniere_valeur_mesuree": "référence + 0.8%", "conforme": 1}, {"equipement_id": 6, "parametre": "Symétrie du faisceau", "unite": "%", "valeur_reference": "< 2", "derniere_valeur_mesuree": "1.1", "conforme": 1}, {"equipement_id": 22, "parametre": "Poids relevé (pesée intégrée)", "unite": "kg", "valeur_reference": "plausible / patient", "derniere_valeur_mesuree": "-", "conforme": 1}, {"equipement_id": 25, "parametre": "Pression de vapeur", "unite": "bar", "valeur_reference": "2.0 - 2.2", "derniere_valeur_mesuree": "2.1", "conforme": 1}, {"equipement_id": 25, "parametre": "Température de stérilisation", "unite": "°C", "valeur_reference": "134", "derniere_valeur_mesuree": "134", "conforme": 1}], "interventions": [{"id": 16, "equipement_id": 29, "type": "preventive", "date_intervention": "2026-07-22", "technicien": "Salma Ouazzani", "description_probleme": "Maintenance préventive de plusieurs microscopes du laboratoire de biologie moléculaire.", "diagnostic": null, "action_corrective": "Nettoyage, inspection et réglages des appareils.", "statut": "resolue"}, {"id": 15, "equipement_id": 20, "type": "preventive", "date_intervention": "2026-07-22", "technicien": "Salma Ouazzani", "description_probleme": "Maintenance préventive de l'automate de coloration et de son poste informatique de commande.", "diagnostic": null, "action_corrective": "Vérification du logiciel de contrôle, de la communication ordinateur-automate, contrôle général du système.", "statut": "resolue"}, {"id": 14, "equipement_id": 28, "type": "corrective", "date_intervention": "2026-07-21", "technicien": "Yassine Idrissi", "description_probleme": "Blocage du lavabo d'un poste de macroscopie.", "diagnostic": "Des lames tombées dans le système se sont coincées dans le moteur situé sous le lavabo, provoquant son blocage.", "action_corrective": "Remplacement du moteur nécessaire ; intervention non finalisée dans l'immédiat, pièce à commander.", "statut": "en_attente_piece"}, {"id": 13, "equipement_id": 28, "type": "preventive", "date_intervention": "2026-07-21", "technicien": "Yassine Idrissi", "description_probleme": "Maintenance préventive programmée des postes de macroscopie.", "diagnostic": null, "action_corrective": "Nettoyage des postes, vérification des systèmes d'aspiration et de ventilation, contrôle général des composants.", "statut": "resolue"}, {"id": 12, "equipement_id": 25, "type": "corrective", "date_intervention": "2026-07-18", "technicien": "Yassine Idrissi", "description_probleme": "Moteur du système d'impression de l'autoclave hors service.", "diagnostic": "Rouleau de papier non adapté à l'appareil : déroulement incorrect, déplacement du mécanisme d'entraînement, surchauffe puis détérioration du moteur.", "action_corrective": "Remplacement du moteur de l'imprimante de l'autoclave.", "statut": "resolue"}, {"id": 9, "equipement_id": 51, "type": "corrective", "date_intervention": "2026-07-17", "technicien": "Salma Ouazzani", "description_probleme": "Six débitmètres signalés comme défectueux par le personnel médical.", "diagnostic": "Après tests, quatre débitmètres ont retrouvé un fonctionnement normal. Les deux autres présentaient des pannes liées à la porte : l'un affichait une erreur de porte (Door Error), l'autre avait une porte physiquement cassée.", "action_corrective": "Échange des portes entre les deux appareils défectueux pour remettre un débitmètre en service immédiatement ; le second envoyé chez le fournisseur pour remplacement de la pièce.", "statut": "en_attente_fournisseur"}, {"id": 6, "equipement_id": 4, "type": "corrective", "date_intervention": "2026-07-16", "technicien": "Salma Ouazzani", "description_probleme": "Pédales de commande du système de biopsie ne répondaient plus.", "diagnostic": "Rupture des câbles des pédales de commande.", "action_corrective": "Remplacement des câbles défectueux.", "statut": "resolue"}, {"id": 5, "equipement_id": 3, "type": "corrective", "date_intervention": "2026-07-16", "technicien": "Salma Ouazzani", "description_probleme": "Erreur du détecteur d'image du mammographe.", "diagnostic": "Problème de communication logiciel/matériel : le logiciel assurant cette communication n'était pas correctement installé.", "action_corrective": "Réinstallation et configuration du logiciel.", "statut": "resolue"}, {"id": 10, "equipement_id": 52, "type": "corrective", "date_intervention": "2026-07-15", "technicien": "Salma Ouazzani", "description_probleme": "Perte d'autonomie du scanner de spécimen Faxitron OR.", "diagnostic": "Origine supposée : batteries ou bloc d'alimentation.", "action_corrective": "Remplacement des batteries effectué, mais l'appareil ne fonctionnait toujours pas correctement après l'intervention. Origine exacte non identifiée.", "statut": "en_attente_fournisseur"}, {"id": 7, "equipement_id": 49, "type": "corrective", "date_intervention": "2026-07-14", "technicien": "Yassine Idrissi", "description_probleme": "L'ECG n'imprimait pas.", "diagnostic": "Après réparation mécanique d'un tiroir d'imprimante qui se fermait difficilement, l'impression ne fonctionnait toujours pas : l'appareil utilise une impression thermique et nécessite du papier thermique, or du papier ordinaire avait été installé.", "action_corrective": "Remplacement par le papier thermique approprié.", "statut": "resolue"}, {"id": 4, "equipement_id": 1, "type": "corrective", "date_intervention": "2026-07-14", "technicien": "Salma Ouazzani", "description_probleme": "Panne d'un système d'IRM.", "diagnostic": "Défaillance de la mémoire vive (RAM) au niveau du serveur de traitement / console d'acquisition, provoquant le lancement automatique de l'outil de diagnostic mémoire Windows et le blocage des examens.", "action_corrective": "Remplacement du composant mémoire défectueux.", "statut": "resolue"}, {"id": 3, "equipement_id": 6, "type": "preventive", "date_intervention": "2026-07-11", "technicien": "Salma Ouazzani", "description_probleme": "Maintenance préventive et contrôle qualité de l'accélérateur linéaire.", "diagnostic": null, "action_corrective": "Mise sous vide du canon à électrons à l'aide d'une pompe à vide ; contrôle qualité et étalonnage par les physiciens médicaux, vérifiant la concordance entre positions, angles et valeurs mesurées et celles affichées par le système (qualification).", "statut": "resolue"}, {"id": 2, "equipement_id": 6, "type": "corrective", "date_intervention": "2026-07-10", "technicien": "Yassine Idrissi", "description_probleme": "Conflit réseau sur l'accélérateur linéaire.", "diagnostic": "La communication entre l'équipement et le poste informatique était rompue : l'adresse IP du PC avait été reprise par un routeur récemment installé sur le réseau, provoquant un conflit d'adresse.", "action_corrective": "Reconfiguration réseau et restauration de l'adresse IP correcte, avec l'aide du service informatique.", "statut": "resolue"}, {"id": 11, "equipement_id": 22, "type": "corrective", "date_intervention": "2026-07-09", "technicien": "Yassine Idrissi", "description_probleme": "Bruits anormaux et vibrations de la pompe du compresseur d'un lit de réanimation.", "diagnostic": "Signes évocateurs d'une usure ou d'un défaut interne de la pompe du compresseur (matelas anti-escarres à cellules pneumatiques).", "action_corrective": "Remplacement temporaire de la pompe en attendant le diagnostic du fournisseur, pour assurer la continuité des soins.", "statut": "en_attente_fournisseur"}, {"id": 8, "equipement_id": 50, "type": "preventive", "date_intervention": "2026-07-08", "technicien": "Yassine Idrissi", "description_probleme": "Maintenance préventive de deux mini défibrillateurs.", "diagnostic": null, "action_corrective": "Remplacement des batteries afin de garantir leur autonomie et leur disponibilité immédiate en cas d'urgence.", "statut": "resolue"}, {"id": 1, "equipement_id": 16, "type": "corrective", "date_intervention": "2026-07-08", "technicien": "Yassine Idrissi", "description_probleme": "Le grand défibrillateur ne s'allumait pas alors qu'il était correctement branché.", "diagnostic": "Diagnostic en deux temps : le bloc d'alimentation démonté ne présentait aucun défaut visible ; envoyé chez le fournisseur, le diagnostic a révélé un varistor déplacé de quelques millimètres de son emplacement.", "action_corrective": "Repositionnement correct du varistor.", "statut": "resolue"}], "checklists": [{"id": 1, "nom": "Checklist maintenance préventive standard (par défaut)", "equipement_id": null, "source_reference": "OMS - Medical equipment maintenance programme overview (2011) ; OMS - LQMS module 3-4"}, {"id": 2, "nom": "Checklist maintenance préventive - IRM", "equipement_id": 1, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS ; panne réelle (RAM) observée au stage"}, {"id": 3, "nom": "Checklist maintenance préventive - Scanner-simulateur", "equipement_id": 2, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; AAPM Report 83 / TG-66 (QA des scanners de simulation en radiothérapie) ; Programme d'accréditation TDM de l'ACR - tolérances réelles reprises dans l'onglet Monitoring continu"}, {"id": 4, "nom": "Checklist maintenance préventive - Mammographe", "equipement_id": 3, "source_reference": "Adapté du chap. 3 ; OMS ; panne réelle (logiciel détecteur) observée au stage"}, {"id": 5, "nom": "Checklist maintenance préventive - Système de biopsie EnCor Enspire", "equipement_id": 4, "source_reference": "Adapté du chap. 3 ; OMS ; panne réelle (câbles pédales) observée au stage"}, {"id": 6, "nom": "Checklist maintenance préventive - Échographe", "equipement_id": 5, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 7, "nom": "Checklist contrôle qualité - Accélérateur linéaire (LINAC)", "equipement_id": 6, "source_reference": "AAPM TG-142 ; IAEA TRS-398 ; observation réelle du stage - pompe à vide du canon à électrons, étalonnage physiciens"}, {"id": 8, "nom": "Checklist maintenance préventive - Unité de curiethérapie HDR", "equipement_id": 7, "source_reference": "Adapté du chap. 3 ; AAPM/ESTRO (cadre général curiethérapie)"}, {"id": 9, "nom": "Checklist maintenance préventive - Endoscope souple", "equipement_id": 8, "source_reference": "Adapté du chap. 3 (test d'étanchéité, retraitement) ; OMS"}, {"id": 10, "nom": "Checklist maintenance préventive - Colonne d'endoscopie Fujifilm", "equipement_id": 9, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 11, "nom": "Checklist maintenance préventive - Laveur-désinfecteur d'endoscopes", "equipement_id": 10, "source_reference": "Observation réelle du stage - test en mode manuel des organes du laveur"}, {"id": 12, "nom": "Checklist maintenance préventive - Générateur d'électrochirurgie Erbe", "equipement_id": 11, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 13, "nom": "Checklist maintenance préventive - Table d'opération", "equipement_id": 12, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 14, "nom": "Checklist maintenance préventive - Scialytique", "equipement_id": 13, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 15, "nom": "Checklist maintenance préventive - Bistouri électrique", "equipement_id": 14, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 16, "nom": "Checklist maintenance préventive - Amplificateur de brillance", "equipement_id": 15, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 17, "nom": "Checklist maintenance préventive - Défibrillateur (bloc)", "equipement_id": 16, "source_reference": "Observation réelle du stage - varistor déplacé, panne d'allumage"}, {"id": 18, "nom": "Checklist maintenance préventive - Gamma-caméra SPECT/CT", "equipement_id": 17, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 19, "nom": "Checklist maintenance préventive - Automate de traitement des tissus (ILSA)", "equipement_id": 18, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 20, "nom": "Checklist maintenance préventive - Microtome rotatif", "equipement_id": 19, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 21, "nom": "Checklist maintenance préventive - Automate de coloration", "equipement_id": 20, "source_reference": "Observation réelle du stage - vérification logiciel et communication ordinateur-automate"}, {"id": 22, "nom": "Checklist maintenance préventive - Ion GeneStudio S5 Plus", "equipement_id": 21, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 23, "nom": "Checklist maintenance préventive - Lit de réanimation", "equipement_id": 22, "source_reference": "Observation réelle du stage - pompe du compresseur remplacée"}, {"id": 24, "nom": "Checklist maintenance préventive - Respirateur de réanimation", "equipement_id": 23, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 25, "nom": "Checklist maintenance préventive - Laveur-désinfecteur (Stérilisation)", "equipement_id": 24, "source_reference": "Adapté du chap. 3 (test en mode manuel) ; OMS"}, {"id": 26, "nom": "Checklist maintenance préventive - Autoclave", "equipement_id": 25, "source_reference": "Observation réelle du stage - moteur d'imprimante endommagé par un rouleau de papier non adapté"}, {"id": 27, "nom": "Checklist maintenance préventive - Stérilisateur à plasma", "equipement_id": 26, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 28, "nom": "Checklist maintenance préventive - Armoire pharmaceutique STOCKART", "equipement_id": 27, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 29, "nom": "Checklist maintenance préventive - Poste de macroscopie", "equipement_id": 28, "source_reference": "Observation réelle du stage - blocage moteur lavabo par des lames"}, {"id": 30, "nom": "Checklist maintenance préventive - Microscope (biologie moléculaire)", "equipement_id": 29, "source_reference": "Observation réelle du stage - nettoyage, inspection, réglages"}, {"id": 31, "nom": "Checklist maintenance préventive - Table de radiologie conventionnelle", "equipement_id": 30, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 32, "nom": "Checklist maintenance préventive - Arceau de radiologie interventionnelle", "equipement_id": 31, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 33, "nom": "Checklist maintenance préventive - Testeur d'étanchéité manuel", "equipement_id": 32, "source_reference": "Observation réelle du stage - contrôle avant chaque lavage d'endoscope"}, {"id": 34, "nom": "Checklist maintenance préventive - Station d'anesthésie-réanimation (endoscopie)", "equipement_id": 33, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 35, "nom": "Checklist maintenance préventive - Aspirateur chirurgical", "equipement_id": 34, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 36, "nom": "Checklist maintenance préventive - Colonne de cœlioscopie", "equipement_id": 35, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 37, "nom": "Checklist maintenance préventive - Laryngoscope", "equipement_id": 36, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 38, "nom": "Checklist maintenance préventive - Moniteur cardio-respiratoire (bloc)", "equipement_id": 37, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 39, "nom": "Checklist maintenance préventive - Armoire de Traitement d'Air (ATA)", "equipement_id": 38, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 40, "nom": "Checklist maintenance préventive - Station d'inclusion", "equipement_id": 39, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 41, "nom": "Checklist maintenance préventive - Plaque froide", "equipement_id": 40, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 42, "nom": "Checklist maintenance préventive - Bain-marie de flottation", "equipement_id": 41, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 43, "nom": "Checklist maintenance préventive - Étuve de séchage", "equipement_id": 42, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 44, "nom": "Checklist maintenance préventive - Ion Chef System", "equipement_id": 43, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 45, "nom": "Checklist maintenance préventive - SeqStudio Genetic Analyzer", "equipement_id": 44, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 46, "nom": "Checklist maintenance préventive - Pousse-seringue électrique", "equipement_id": 45, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 47, "nom": "Checklist maintenance préventive - Moniteur cardio-respiratoire (réanimation)", "equipement_id": 46, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 48, "nom": "Checklist maintenance préventive - Défibrillateur (réanimation)", "equipement_id": 47, "source_reference": "Adapté du chap. 3 ; observations réelles du stage sur le défibrillateur du bloc"}, {"id": 49, "nom": "Checklist maintenance préventive - Thermo-soudeuse", "equipement_id": 48, "source_reference": "Adapté du principe de fonctionnement (chap. 3) ; OMS"}, {"id": 50, "nom": "Checklist maintenance préventive - Électrocardiographe (ECG)", "equipement_id": 49, "source_reference": "Observation réelle du stage - papier thermique requis, tiroir imprimante"}, {"id": 51, "nom": "Checklist maintenance préventive - Mini défibrillateur", "equipement_id": 50, "source_reference": "Observation réelle du stage - remplacement préventif des batteries"}, {"id": 52, "nom": "Checklist maintenance préventive - Débitmètre", "equipement_id": 51, "source_reference": "Observation réelle du stage - panne de porte sur 2 des 6 appareils testés"}, {"id": 53, "nom": "Checklist maintenance préventive - Scanner de spécimen Faxitron OR", "equipement_id": 52, "source_reference": "Observation réelle du stage - panne d'autonomie non résolue, en attente fournisseur"}], "taches": [{"checklist_id": 1, "ordre": 1, "tache": "Vérifier l'état extérieur et les câbles de l'équipement", "est_qualification": 0}, {"checklist_id": 1, "ordre": 2, "tache": "Tester le fonctionnement opérationnel général", "est_qualification": 0}, {"checklist_id": 1, "ordre": 3, "tache": "Contrôler et étalonner les mesures affichées par l'appareil (qualification)", "est_qualification": 1}, {"checklist_id": 1, "ordre": 4, "tache": "Vérifier le niveau et l'état de la batterie", "est_qualification": 0}, {"checklist_id": 1, "ordre": 5, "tache": "Nettoyer et désinfecter l'équipement", "est_qualification": 0}, {"checklist_id": 1, "ordre": 6, "tache": "Mettre à jour le logiciel/firmware si nécessaire", "est_qualification": 0}, {"checklist_id": 1, "ordre": 7, "tache": "Retester l'équipement après toute intervention", "est_qualification": 1}, {"checklist_id": 1, "ordre": 8, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 2, "ordre": 1, "tache": "Vérifier le système de refroidissement et le niveau d'hélium de l'aimant", "est_qualification": 0}, {"checklist_id": 2, "ordre": 2, "tache": "Tester la console d'acquisition et la communication avec le serveur d'images", "est_qualification": 0}, {"checklist_id": 2, "ordre": 3, "tache": "Contrôler l'homogénéité du champ magnétique et la stabilité du niveau d'hélium", "est_qualification": 1}, {"checklist_id": 2, "ordre": 4, "tache": "Vérifier la mémoire (RAM) du serveur de traitement - cause réelle d'une panne bloquant les examens", "est_qualification": 0}, {"checklist_id": 2, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 3, "ordre": 1, "tache": "Vérifier le tube à rayons X, les détecteurs et le portique (gantry)", "est_qualification": 0}, {"checklist_id": 3, "ordre": 2, "tache": "Tester le déplacement de la table motorisée et l'acquisition hélicoïdale", "est_qualification": 0}, {"checklist_id": 3, "ordre": 3, "tache": "Contrôler la calibration des unités Hounsfield (HU) par rapport aux valeurs de référence", "est_qualification": 1}, {"checklist_id": 3, "ordre": 4, "tache": "Vérifier la reproductibilité du plan de coupe utilisé pour la planification en radiothérapie", "est_qualification": 0}, {"checklist_id": 3, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 4, "ordre": 1, "tache": "Vérifier le tube radiogène et le système de compression du sein", "est_qualification": 0}, {"checklist_id": 4, "ordre": 2, "tache": "Contrôler la dose délivrée et la force de compression par rapport aux valeurs de référence", "est_qualification": 1}, {"checklist_id": 4, "ordre": 3, "tache": "Vérifier l'installation et la configuration du logiciel de communication du détecteur d'image - panne réelle déjà observée", "est_qualification": 0}, {"checklist_id": 4, "ordre": 4, "tache": "Tester la qualité d'image sur un fantôme de référence", "est_qualification": 0}, {"checklist_id": 4, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 5, "ordre": 1, "tache": "Vérifier l'aiguille de biopsie et le dispositif de guidage stéréotaxique", "est_qualification": 0}, {"checklist_id": 5, "ordre": 2, "tache": "Tester le système d'aspiration et les pédales de commande", "est_qualification": 0}, {"checklist_id": 5, "ordre": 3, "tache": "Contrôler la précision du guidage par rapport à la position ciblée", "est_qualification": 1}, {"checklist_id": 5, "ordre": 4, "tache": "Vérifier l'état des câbles des pédales de commande - rupture déjà observée", "est_qualification": 0}, {"checklist_id": 5, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 6, "ordre": 1, "tache": "Vérifier la sonde (transducteur) et le gel d'échographie", "est_qualification": 0}, {"checklist_id": 6, "ordre": 2, "tache": "Tester le générateur d'ultrasons et le système de traitement d'image", "est_qualification": 0}, {"checklist_id": 6, "ordre": 3, "tache": "Contrôler la profondeur et le gain affichés par rapport à un fantôme de référence", "est_qualification": 1}, {"checklist_id": 6, "ordre": 4, "tache": "Vérifier le système de stockage et l'archivage des images", "est_qualification": 0}, {"checklist_id": 6, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 7, "ordre": 1, "tache": "Mise sous vide du canon à électrons à l'aide d'une pompe à vide", "est_qualification": 0}, {"checklist_id": 7, "ordre": 2, "tache": "Contrôle qualité et étalonnage : concordance positions/angles/valeurs mesurées et affichées", "est_qualification": 1}, {"checklist_id": 7, "ordre": 3, "tache": "Contrôle mécanique du collimateur multilames (MLC)", "est_qualification": 0}, {"checklist_id": 7, "ordre": 4, "tache": "Vérification des mouvements du statif (gantry) et de la table", "est_qualification": 0}, {"checklist_id": 7, "ordre": 5, "tache": "Test des systèmes de sécurité et interlocks", "est_qualification": 0}, {"checklist_id": 7, "ordre": 6, "tache": "Contrôle de la constance du débit de dose (output constancy)", "est_qualification": 1}, {"checklist_id": 7, "ordre": 7, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 8, "ordre": 1, "tache": "Vérifier les cathéters de transfert et les applicateurs", "est_qualification": 0}, {"checklist_id": 8, "ordre": 2, "tache": "Tester le mécanisme de sortie/retour de la source (afterloader)", "est_qualification": 0}, {"checklist_id": 8, "ordre": 3, "tache": "Contrôler l'activité de la source d'Iridium-192 par rapport à la valeur attendue", "est_qualification": 1}, {"checklist_id": 8, "ordre": 4, "tache": "Vérifier les systèmes de sécurité (retour d'urgence de la source)", "est_qualification": 0}, {"checklist_id": 8, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 9, "ordre": 1, "tache": "Vérifier l'état des canaux opérateurs, de la gaine externe et de l'optique", "est_qualification": 0}, {"checklist_id": 9, "ordre": 2, "tache": "Tester l'éclairage, la caméra et les commandes d'angulation", "est_qualification": 0}, {"checklist_id": 9, "ordre": 3, "tache": "Contrôler l'étanchéité de la gaine au testeur avant lavage", "est_qualification": 1}, {"checklist_id": 9, "ordre": 4, "tache": "Vérifier l'absence de contamination croisée après désinfection de haut niveau", "est_qualification": 0}, {"checklist_id": 9, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 10, "ordre": 1, "tache": "Vérifier processeur vidéo, source lumineuse et module d'insufflation", "est_qualification": 0}, {"checklist_id": 10, "ordre": 2, "tache": "Tester l'irrigation/aspiration et l'affichage temps réel", "est_qualification": 0}, {"checklist_id": 10, "ordre": 3, "tache": "Contrôler l'intensité lumineuse délivrée par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 10, "ordre": 4, "tache": "Vérifier le débit de CO₂/air du module d'insufflation", "est_qualification": 0}, {"checklist_id": 10, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 11, "ordre": 1, "tache": "Vérifier les niveaux de détergent enzymatique et de désinfectant", "est_qualification": 0}, {"checklist_id": 11, "ordre": 2, "tache": "Tester individuellement en mode manuel les vannes, pompes et résistance de chauffe", "est_qualification": 1}, {"checklist_id": 11, "ordre": 3, "tache": "Contrôler la température et la durée du cycle de désinfection", "est_qualification": 1}, {"checklist_id": 11, "ordre": 4, "tache": "Vérifier la traçabilité de chaque cycle (identification, durée, paramètres)", "est_qualification": 0}, {"checklist_id": 11, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 12, "ordre": 1, "tache": "Vérifier les électrodes et le câblage monopolaire/bipolaire", "est_qualification": 0}, {"checklist_id": 12, "ordre": 2, "tache": "Tester les modes coupe/coagulation et le module APC 3", "est_qualification": 0}, {"checklist_id": 12, "ordre": 3, "tache": "Contrôler la puissance délivrée par rapport à la valeur affichée", "est_qualification": 1}, {"checklist_id": 12, "ordre": 4, "tache": "Vérifier l'alarme de mauvais contact de l'électrode neutre", "est_qualification": 0}, {"checklist_id": 12, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 13, "ordre": 1, "tache": "Vérifier les vérins/moteurs électriques et le pilier de levage", "est_qualification": 0}, {"checklist_id": 13, "ordre": 2, "tache": "Tester chaque position chirurgicale (dorsale, Trendelenburg, gynécologique)", "est_qualification": 0}, {"checklist_id": 13, "ordre": 3, "tache": "Contrôler la stabilité de la table en position extrême", "est_qualification": 1}, {"checklist_id": 13, "ordre": 4, "tache": "Vérifier les batteries de secours et les capteurs anti-collision", "est_qualification": 0}, {"checklist_id": 13, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 14, "ordre": 1, "tache": "Vérifier les LED et les réflecteurs paraboliques", "est_qualification": 0}, {"checklist_id": 14, "ordre": 2, "tache": "Tester les commandes tactiles/stérilisables et la mémoire de réglages", "est_qualification": 0}, {"checklist_id": 14, "ordre": 3, "tache": "Contrôler l'intensité lumineuse (lux) par rapport à la plage attendue", "est_qualification": 1}, {"checklist_id": 14, "ordre": 4, "tache": "Vérifier l'homogénéité de l'éclairage (absence d'ombre portée)", "est_qualification": 0}, {"checklist_id": 14, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 15, "ordre": 1, "tache": "Vérifier les électrodes et les câbles monopolaire/bipolaire", "est_qualification": 0}, {"checklist_id": 15, "ordre": 2, "tache": "Tester les modes coupe et coagulation", "est_qualification": 0}, {"checklist_id": 15, "ordre": 3, "tache": "Contrôler la puissance délivrée (jusqu'à ~400 W) par rapport à la valeur affichée", "est_qualification": 1}, {"checklist_id": 15, "ordre": 4, "tache": "Vérifier l'alarme de mauvais contact de l'électrode neutre", "est_qualification": 0}, {"checklist_id": 15, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 16, "ordre": 1, "tache": "Vérifier le tube à rayons X et les écrans fluorescents", "est_qualification": 0}, {"checklist_id": 16, "ordre": 2, "tache": "Tester la transmission temps réel vers le moniteur", "est_qualification": 0}, {"checklist_id": 16, "ordre": 3, "tache": "Contrôler la dose délivrée par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 16, "ordre": 4, "tache": "Vérifier le facteur d'amplification de l'image (jusqu'à 10 000 fois)", "est_qualification": 0}, {"checklist_id": 16, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 17, "ordre": 1, "tache": "Vérifier le bloc d'alimentation et les électrodes (adulte/pédiatrique/néonatale)", "est_qualification": 0}, {"checklist_id": 17, "ordre": 2, "tache": "Tester la mise sous tension et la fonction moniteur ECG", "est_qualification": 0}, {"checklist_id": 17, "ordre": 3, "tache": "Contrôler l'énergie de choc délivrée par rapport à la valeur affichée", "est_qualification": 1}, {"checklist_id": 17, "ordre": 4, "tache": "Vérifier le positionnement des composants internes (varistor) en cas de panne d'allumage", "est_qualification": 0}, {"checklist_id": 17, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 18, "ordre": 1, "tache": "Vérifier les deux têtes de détection et le module CT", "est_qualification": 0}, {"checklist_id": 18, "ordre": 2, "tache": "Tester la fusion des images fonctionnelles et anatomiques", "est_qualification": 0}, {"checklist_id": 18, "ordre": 3, "tache": "Contrôler la fenêtre d'énergie du détecteur par rapport au traceur utilisé (ex. 140 keV Tc-99m)", "est_qualification": 1}, {"checklist_id": 18, "ordre": 4, "tache": "Vérifier la dose délivrée par le module CT (filtre étain, reconstruction SAFIRE)", "est_qualification": 0}, {"checklist_id": 18, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 19, "ordre": 1, "tache": "Vérifier les réactifs de déshydratation et d'imprégnation en paraffine", "est_qualification": 0}, {"checklist_id": 19, "ordre": 2, "tache": "Tester le cycle automatisé complet", "est_qualification": 0}, {"checklist_id": 19, "ordre": 3, "tache": "Contrôler la durée et la température de chaque étape par rapport au protocole", "est_qualification": 1}, {"checklist_id": 19, "ordre": 4, "tache": "Vérifier la fermeté du tissu obtenu en sortie de cycle", "est_qualification": 0}, {"checklist_id": 19, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 20, "ordre": 1, "tache": "Vérifier l'état de la lame et le réglage d'épaisseur", "est_qualification": 0}, {"checklist_id": 20, "ordre": 2, "tache": "Tester la coupe en rubans de 3 à 5 µm", "est_qualification": 0}, {"checklist_id": 20, "ordre": 3, "tache": "Contrôler l'épaisseur de coupe obtenue par rapport à la consigne", "est_qualification": 1}, {"checklist_id": 20, "ordre": 4, "tache": "Vérifier l'absence de coupes obliques liées à un mauvais positionnement du bloc", "est_qualification": 0}, {"checklist_id": 20, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 21, "ordre": 1, "tache": "Vérification du logiciel de contrôle", "est_qualification": 0}, {"checklist_id": 21, "ordre": 2, "tache": "Vérification de la communication entre l'ordinateur et l'automate", "est_qualification": 0}, {"checklist_id": 21, "ordre": 3, "tache": "Contrôle général du système", "est_qualification": 0}, {"checklist_id": 21, "ordre": 4, "tache": "Contrôler la teinte de la coloration Hématoxyline-Éosine-Safran par rapport à une lame de référence", "est_qualification": 1}, {"checklist_id": 21, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 22, "ordre": 1, "tache": "Vérifier la puce Ion et les réactifs de séquençage", "est_qualification": 0}, {"checklist_id": 22, "ordre": 2, "tache": "Tester la détection du signal ionique (principe électrochimique)", "est_qualification": 0}, {"checklist_id": 22, "ordre": 3, "tache": "Contrôler la qualité de séquence (Q score) par rapport au seuil attendu", "est_qualification": 1}, {"checklist_id": 22, "ordre": 4, "tache": "Vérifier la compatibilité de la capacité de lecture de la puce avec l'analyse demandée", "est_qualification": 0}, {"checklist_id": 22, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 23, "ordre": 1, "tache": "Vérifier la pompe du compresseur (bruits/vibrations anormaux) - panne réelle déjà observée", "est_qualification": 1}, {"checklist_id": 23, "ordre": 2, "tache": "Tester les cellules pneumatiques du matelas anti-escarres", "est_qualification": 0}, {"checklist_id": 23, "ordre": 3, "tache": "Tester la commande CPR (mise à plat d'urgence)", "est_qualification": 0}, {"checklist_id": 23, "ordre": 4, "tache": "Contrôler la pesée électronique intégrée par rapport à un poids connu", "est_qualification": 1}, {"checklist_id": 23, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 24, "ordre": 1, "tache": "Vérifier les circuits de gaz frais et l'absence de fuite", "est_qualification": 0}, {"checklist_id": 24, "ordre": 2, "tache": "Tester les modes ventilatoires (assistée contrôlée, aide inspiratoire...)", "est_qualification": 0}, {"checklist_id": 24, "ordre": 3, "tache": "Contrôler les volumes/pressions délivrés par rapport aux valeurs réglées", "est_qualification": 1}, {"checklist_id": 24, "ordre": 4, "tache": "Vérifier l'absence d'accumulation de CO₂ (circuit ouvert)", "est_qualification": 0}, {"checklist_id": 24, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 25, "ordre": 1, "tache": "Vérifier les bras de lavage et les buses d'aspersion", "est_qualification": 0}, {"checklist_id": 25, "ordre": 2, "tache": "Tester individuellement en mode manuel les vannes, pompes et résistance de chauffe", "est_qualification": 1}, {"checklist_id": 25, "ordre": 3, "tache": "Contrôler la température de désinfection thermique par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 25, "ordre": 4, "tache": "Vérifier par inspection visuelle les instruments en sortie de cycle", "est_qualification": 0}, {"checklist_id": 25, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 26, "ordre": 1, "tache": "Contrôler la pression de vapeur et la température par rapport aux valeurs de référence", "est_qualification": 1}, {"checklist_id": 26, "ordre": 2, "tache": "Vérifier le joint de porte et l'étanchéité de la chambre", "est_qualification": 0}, {"checklist_id": 26, "ordre": 3, "tache": "Vérifier le rouleau de papier de l'imprimante - cause réelle d'une panne moteur déjà observée", "est_qualification": 0}, {"checklist_id": 26, "ordre": 4, "tache": "Tester le cycle complet (vide initial, injection vapeur, séchage)", "est_qualification": 0}, {"checklist_id": 26, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 27, "ordre": 1, "tache": "Vérifier le système d'injection de peroxyde d'hydrogène", "est_qualification": 0}, {"checklist_id": 27, "ordre": 2, "tache": "Tester la pompe à vide et le générateur de plasma", "est_qualification": 0}, {"checklist_id": 27, "ordre": 3, "tache": "Contrôler la concentration de peroxyde d'hydrogène par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 27, "ordre": 4, "tache": "Vérifier la compatibilité des dispositifs thermosensibles traités", "est_qualification": 0}, {"checklist_id": 27, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 28, "ordre": 1, "tache": "Vérifier le système d'authentification (badge/code/biométrie)", "est_qualification": 0}, {"checklist_id": 28, "ordre": 2, "tache": "Tester le déverrouillage du compartiment prescrit", "est_qualification": 0}, {"checklist_id": 28, "ordre": 3, "tache": "Contrôler la concordance entre stock théorique et stock réel", "est_qualification": 1}, {"checklist_id": 28, "ordre": 4, "tache": "Vérifier la vidéosurveillance et la traçabilité des mouvements", "est_qualification": 0}, {"checklist_id": 28, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 29, "ordre": 1, "tache": "Nettoyage des postes", "est_qualification": 0}, {"checklist_id": 29, "ordre": 2, "tache": "Vérification des systèmes d'aspiration et de ventilation", "est_qualification": 0}, {"checklist_id": 29, "ordre": 3, "tache": "Contrôle général des composants", "est_qualification": 0}, {"checklist_id": 29, "ordre": 4, "tache": "Vérifier le lavabo et son moteur - blocage réel déjà observé (lames tombées dans le moteur)", "est_qualification": 1}, {"checklist_id": 29, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 30, "ordre": 1, "tache": "Nettoyage de l'appareil", "est_qualification": 0}, {"checklist_id": 30, "ordre": 2, "tache": "Inspection générale", "est_qualification": 0}, {"checklist_id": 30, "ordre": 3, "tache": "Réglages optiques", "est_qualification": 0}, {"checklist_id": 30, "ordre": 4, "tache": "Contrôler la mise au point et le grossissement par rapport à une lame de référence", "est_qualification": 1}, {"checklist_id": 30, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 31, "ordre": 1, "tache": "Vérifier le tube à rayons X et la suspension plafonnière", "est_qualification": 0}, {"checklist_id": 31, "ordre": 2, "tache": "Tester le bucky mural et le détecteur numérique/lecteur CR", "est_qualification": 0}, {"checklist_id": 31, "ordre": 3, "tache": "Contrôler la dose délivrée par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 31, "ordre": 4, "tache": "Vérifier la console d'acquisition (visualisation, transfert des images)", "est_qualification": 0}, {"checklist_id": 31, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 32, "ordre": 1, "tache": "Vérifier le bras en C et le tube à rayons X mobile", "est_qualification": 0}, {"checklist_id": 32, "ordre": 2, "tache": "Tester le guidage temps réel (biopsies, embolisations, drainages)", "est_qualification": 0}, {"checklist_id": 32, "ordre": 3, "tache": "Contrôler la dose délivrée par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 32, "ordre": 4, "tache": "Vérifier la mobilité et le verrouillage du bras", "est_qualification": 0}, {"checklist_id": 32, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 33, "ordre": 1, "tache": "Vérifier la mise sous pression de l'endoscope", "est_qualification": 1}, {"checklist_id": 33, "ordre": 2, "tache": "Contrôler l'absence de chute de pression par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 33, "ordre": 3, "tache": "Vérifier qu'un endoscope non étanche n'est jamais immergé dans le laveur-désinfecteur", "est_qualification": 0}, {"checklist_id": 33, "ordre": 4, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 34, "ordre": 1, "tache": "Vérifier les vaporisateurs et les circuits de gaz", "est_qualification": 0}, {"checklist_id": 34, "ordre": 2, "tache": "Tester les moniteurs associés (ECG, PA, SpO₂, FR)", "est_qualification": 0}, {"checklist_id": 34, "ordre": 3, "tache": "Contrôler les concentrations de gaz délivrées par rapport aux valeurs réglées", "est_qualification": 1}, {"checklist_id": 34, "ordre": 4, "tache": "Vérifier l'alimentation en oxygène et air médical", "est_qualification": 0}, {"checklist_id": 34, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 35, "ordre": 1, "tache": "Vérifier la sonde d'aspiration et le filtre antibactérien", "est_qualification": 0}, {"checklist_id": 35, "ordre": 2, "tache": "Tester le générateur de vide (pompe ou vide central)", "est_qualification": 0}, {"checklist_id": 35, "ordre": 3, "tache": "Contrôler le réglage de dépression par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 35, "ordre": 4, "tache": "Vérifier la stérilisation des bocaux et tuyaux autoclavables", "est_qualification": 0}, {"checklist_id": 35, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 36, "ordre": 1, "tache": "Vérifier caméra, source lumineuse et insufflateur de CO₂", "est_qualification": 0}, {"checklist_id": 36, "ordre": 2, "tache": "Tester la transmission d'image et l'insufflation", "est_qualification": 0}, {"checklist_id": 36, "ordre": 3, "tache": "Contrôler la pression d'insufflation par rapport à la valeur réglée", "est_qualification": 1}, {"checklist_id": 36, "ordre": 4, "tache": "Vérifier le moniteur et le processeur vidéo", "est_qualification": 0}, {"checklist_id": 36, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 37, "ordre": 1, "tache": "Vérifier la lame et la source lumineuse", "est_qualification": 0}, {"checklist_id": 37, "ordre": 2, "tache": "Tester l'éclairage et la visualisation du larynx", "est_qualification": 0}, {"checklist_id": 37, "ordre": 3, "tache": "Contrôler le niveau d'éclairage par rapport à la valeur attendue", "est_qualification": 1}, {"checklist_id": 37, "ordre": 4, "tache": "Vérifier la batterie/pile de l'éclairage", "est_qualification": 0}, {"checklist_id": 37, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 38, "ordre": 1, "tache": "Vérifier les électrodes ECG et le brassard de pression", "est_qualification": 0}, {"checklist_id": 38, "ordre": 2, "tache": "Tester SpO₂, ECG, fréquence respiratoire et pression artérielle", "est_qualification": 0}, {"checklist_id": 38, "ordre": 3, "tache": "Contrôler les valeurs affichées par rapport à un simulateur patient", "est_qualification": 1}, {"checklist_id": 38, "ordre": 4, "tache": "Vérifier les seuils d'alarme réglés", "est_qualification": 0}, {"checklist_id": 38, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 39, "ordre": 1, "tache": "Vérifier les filtres G4, F9 et HEPA H14", "est_qualification": 0}, {"checklist_id": 39, "ordre": 2, "tache": "Tester le flux laminaire au-dessus de la table", "est_qualification": 0}, {"checklist_id": 39, "ordre": 3, "tache": "Contrôler la température et l'humidité par rapport aux consignes", "est_qualification": 1}, {"checklist_id": 39, "ordre": 4, "tache": "Vérifier les grilles de reprise d'air vicié", "est_qualification": 0}, {"checklist_id": 39, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 40, "ordre": 1, "tache": "Vérifier le bain de paraffine liquide", "est_qualification": 0}, {"checklist_id": 40, "ordre": 2, "tache": "Tester l'orientation et l'enrobage du tissu", "est_qualification": 0}, {"checklist_id": 40, "ordre": 3, "tache": "Contrôler la température de la paraffine par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 40, "ordre": 4, "tache": "Vérifier l'absence de bulles dans le bloc", "est_qualification": 0}, {"checklist_id": 40, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 41, "ordre": 1, "tache": "Vérifier le système de refroidissement", "est_qualification": 0}, {"checklist_id": 41, "ordre": 2, "tache": "Tester la vitesse de solidification du bloc", "est_qualification": 0}, {"checklist_id": 41, "ordre": 3, "tache": "Contrôler la température de la plaque par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 41, "ordre": 4, "tache": "Vérifier l'homogénéité du bloc (absence de zone molle)", "est_qualification": 0}, {"checklist_id": 41, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 42, "ordre": 1, "tache": "Vérifier le niveau d'eau et la propreté du bain", "est_qualification": 0}, {"checklist_id": 42, "ordre": 2, "tache": "Tester la mise à plat des coupes", "est_qualification": 0}, {"checklist_id": 42, "ordre": 3, "tache": "Contrôler la température du bain par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 42, "ordre": 4, "tache": "Vérifier l'absence de plis résiduels sur les coupes", "est_qualification": 0}, {"checklist_id": 42, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 43, "ordre": 1, "tache": "Vérifier la résistance chauffante et la ventilation", "est_qualification": 0}, {"checklist_id": 43, "ordre": 2, "tache": "Tester la fixation de la coupe sur la lame", "est_qualification": 0}, {"checklist_id": 43, "ordre": 3, "tache": "Contrôler la température de l'étuve par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 43, "ordre": 4, "tache": "Vérifier la durée de séchage appliquée", "est_qualification": 0}, {"checklist_id": 43, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 44, "ordre": 1, "tache": "Vérifier les réactifs de préparation des librairies", "est_qualification": 0}, {"checklist_id": 44, "ordre": 2, "tache": "Tester l'enrichissement des matrices et le chargement des puces", "est_qualification": 0}, {"checklist_id": 44, "ordre": 3, "tache": "Contrôler la concentration des librairies préparées par rapport au seuil attendu", "est_qualification": 1}, {"checklist_id": 44, "ordre": 4, "tache": "Vérifier la compatibilité avec la puce Ion utilisée", "est_qualification": 0}, {"checklist_id": 44, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 45, "ordre": 1, "tache": "Vérifier les réactifs et capillaires de séquençage", "est_qualification": 0}, {"checklist_id": 45, "ordre": 2, "tache": "Tester une analyse ciblée rapide", "est_qualification": 0}, {"checklist_id": 45, "ordre": 3, "tache": "Contrôler la qualité du signal par rapport au seuil attendu", "est_qualification": 1}, {"checklist_id": 45, "ordre": 4, "tache": "Vérifier que l'analyse ne mobilise pas toute la chaîne Ion Torrent", "est_qualification": 0}, {"checklist_id": 45, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 46, "ordre": 1, "tache": "Vérifier le mécanisme de poussée du piston", "est_qualification": 0}, {"checklist_id": 46, "ordre": 2, "tache": "Tester chaque unité pour le traitement dédié (sédatif, antalgique, catécholamine)", "est_qualification": 0}, {"checklist_id": 46, "ordre": 3, "tache": "Contrôler le débit délivré par rapport au débit réglé", "est_qualification": 1}, {"checklist_id": 46, "ordre": 4, "tache": "Vérifier les alarmes d'occlusion/fin de seringue", "est_qualification": 0}, {"checklist_id": 46, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 47, "ordre": 1, "tache": "Vérifier les électrodes ECG et le brassard de pression", "est_qualification": 0}, {"checklist_id": 47, "ordre": 2, "tache": "Tester SpO₂, ECG, fréquence respiratoire et pression artérielle en continu", "est_qualification": 0}, {"checklist_id": 47, "ordre": 3, "tache": "Contrôler les valeurs affichées par rapport à un simulateur patient", "est_qualification": 1}, {"checklist_id": 47, "ordre": 4, "tache": "Vérifier les seuils d'alarme réglés individuellement par patient", "est_qualification": 0}, {"checklist_id": 47, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 48, "ordre": 1, "tache": "Vérifier le bloc d'alimentation et les électrodes", "est_qualification": 0}, {"checklist_id": 48, "ordre": 2, "tache": "Tester la mise sous tension et la fonction moniteur ECG", "est_qualification": 0}, {"checklist_id": 48, "ordre": 3, "tache": "Contrôler l'énergie de choc délivrée par rapport à la valeur affichée", "est_qualification": 1}, {"checklist_id": 48, "ordre": 4, "tache": "Vérifier la disponibilité immédiate à proximité du lit", "est_qualification": 0}, {"checklist_id": 48, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 49, "ordre": 1, "tache": "Vérifier la résistance chauffante et la barre de soudure", "est_qualification": 0}, {"checklist_id": 49, "ordre": 2, "tache": "Tester le scellage d'une gaine de stérilisation", "est_qualification": 0}, {"checklist_id": 49, "ordre": 3, "tache": "Contrôler la température de soudure par rapport à la valeur de référence", "est_qualification": 1}, {"checklist_id": 49, "ordre": 4, "tache": "Vérifier l'intégrité du scellage (absence de fuite)", "est_qualification": 0}, {"checklist_id": 49, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 50, "ordre": 1, "tache": "Vérifier le tiroir de l'imprimante (fermeture) - panne réelle déjà observée", "est_qualification": 0}, {"checklist_id": 50, "ordre": 2, "tache": "Vérifier que le papier chargé est du papier thermique (et non ordinaire) - cause réelle d'une panne déjà observée", "est_qualification": 0}, {"checklist_id": 50, "ordre": 3, "tache": "Contrôler le tracé affiché par rapport à un signal de référence", "est_qualification": 1}, {"checklist_id": 50, "ordre": 4, "tache": "Tester les électrodes et les câbles patient", "est_qualification": 0}, {"checklist_id": 50, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 51, "ordre": 1, "tache": "Remplacer/vérifier les batteries pour garantir l'autonomie", "est_qualification": 0}, {"checklist_id": 51, "ordre": 2, "tache": "Tester la disponibilité immédiate en cas d'urgence", "est_qualification": 0}, {"checklist_id": 51, "ordre": 3, "tache": "Contrôler l'énergie de choc délivrée par rapport à la valeur affichée", "est_qualification": 1}, {"checklist_id": 51, "ordre": 4, "tache": "Vérifier les électrodes adaptées à l'âge du patient (adulte/pédiatrique/néonatale)", "est_qualification": 0}, {"checklist_id": 51, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 52, "ordre": 1, "tache": "Vérifier la porte du dispositif (fermeture, absence d'erreur \"Door Error\") - panne réelle déjà observée", "est_qualification": 0}, {"checklist_id": 52, "ordre": 2, "tache": "Tester le débit affiché sur plusieurs paliers", "est_qualification": 0}, {"checklist_id": 52, "ordre": 3, "tache": "Contrôler le débit réellement délivré par rapport au débit affiché", "est_qualification": 1}, {"checklist_id": 52, "ordre": 4, "tache": "Vérifier l'intégrité mécanique de la porte (remplacement déjà nécessaire sur un cas réel)", "est_qualification": 0}, {"checklist_id": 52, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}, {"checklist_id": 53, "ordre": 1, "tache": "Vérifier les batteries et le bloc d'alimentation - cause suspectée d'une panne réelle déjà observée", "est_qualification": 0}, {"checklist_id": 53, "ordre": 2, "tache": "Tester l'acquisition d'image d'une pièce opératoire", "est_qualification": 0}, {"checklist_id": 53, "ordre": 3, "tache": "Contrôler la qualité d'image par rapport à un fantôme de référence", "est_qualification": 1}, {"checklist_id": 53, "ordre": 4, "tache": "Vérifier l'autonomie de l'appareil en fonctionnement continu", "est_qualification": 0}, {"checklist_id": 53, "ordre": 5, "tache": "Documenter les résultats et planifier la prochaine maintenance", "est_qualification": 0}]};
+var COUT_HTML = "<div class=\"card\" style=\"border-left:4px solid var(--rose-deep);margin-bottom:20px;\">\n    <strong>Ce que couvre cette page, et ses limites.</strong> La professeure a demandé un chiffrage du projet\n    de capteurs qui capteraient réellement les valeurs du scanner et de l'IRM, en remplacement du générateur\n    simulé utilisé dans ce prototype. Je ne suis pas acheteuse en ingénierie biomédicale et je n'ai pas de devis\n    réel auprès d'un fournisseur médical. Les prix ci-dessous viennent de recherches ponctuelles (octobre 2026)\n    sur des sites de vente de composants d'instrumentation industrielle et de pièces d'imagerie grand public, pas\n    de catalogues internes de fabricants de scanners ou d'IRM, qui restent propriétaires et non publics. Je les\n    donne comme ordre de grandeur, à vérifier avant tout vrai projet auprès d'un fournisseur spécialisé en\n    instrumentation médicale ou directement auprès du fabricant de l'appareil.\n</div>\n\n<div class=\"section-title\" style=\"margin-top:0;\">Scanner-simulateur : composants, par paramètre surveillé</div>\n<div class=\"table-wrap\" style=\"margin-bottom:18px;\">\n    <table>\n        <thead><tr><th>Paramètre</th><th>Capteur / méthode</th><th>Exemple de prix trouvé</th><th>Fiabilité de ce chiffre</th></tr></thead>\n        <tbody>\n            <tr>\n                <td>Température du tube RX</td>\n                <td>Sonde RTD (PT100)</td>\n                <td class=\"mono\">≈ 111 € HT l'unité (≈ 135 € TTC)</td>\n                <td class=\"muted\" style=\"font-size:12.5px;\">Prix réel relevé sur un distributeur de composants industriels (RS Online, un seul modèle). Un capteur certifié pour l'intérieur d'un scanner médical coûterait probablement plus cher.</td>\n            </tr>\n            <tr>\n                <td>Rotation du portique</td>\n                <td>Codeur rotatif (encodeur)</td>\n                <td class=\"mono\">≈ 344 $ HT l'unité (modèle d'entrée de gamme)</td>\n                <td class=\"muted\" style=\"font-size:12.5px;\">Prix réel relevé, mais pour un encodeur mécanique basique (12 points), pas la précision qu'exigerait un gantry de scanner. À considérer comme une borne basse, pas une estimation fiable du bon capteur.</td>\n            </tr>\n            <tr>\n                <td>Position de la table</td>\n                <td>Codeur linéaire / règle optique</td>\n                <td class=\"mono\">Non trouvé</td>\n                <td class=\"muted\" style=\"font-size:12.5px;\">Je n'ai pas trouvé de prix public vérifiable pour ce type de composant en quelques recherches. Je préfère le dire plutôt que d'inventer un chiffre : à demander directement à un fournisseur (Heidenhain, RLS, Renishaw et équivalents sont les marques usuelles du secteur, à titre indicatif seulement).</td>\n            </tr>\n            <tr>\n                <td>Dérive HU / reproductibilité du plan</td>\n                <td>Fantôme eau + logiciel d'extraction automatique + analyse d'image (billes radio-opaques)</td>\n                <td class=\"mono\">Pas un capteur à l'unité : développement logiciel</td>\n                <td class=\"muted\" style=\"font-size:12.5px;\">Coût dominé par le temps de développement (voir ligne logicielle ci-dessous), pas par une pièce physique.</td>\n            </tr>\n            <tr>\n                <td>Acquisition &amp; transmission</td>\n                <td>Module d'acquisition de données (DAQ) + passerelle réseau</td>\n                <td class=\"mono\">De l'ordre de quelques centaines d'euros par voie</td>\n                <td class=\"muted\" style=\"font-size:12.5px;\">Je n'ai pas trouvé de prix actuel fiable : la seule référence trouvée est une annonce National Instruments de 2005 (« moins de 500 $ »), clairement obsolète. Chiffre à vérifier avant tout achat.</td>\n            </tr>\n        </tbody>\n    </table>\n</div>\n\n<div class=\"section-title\">IRM : composants, par paramètre surveillé</div>\n<div class=\"card\" style=\"margin-bottom:18px;\">\n    <p style=\"font-size:13px;\">\n        Différence notable avec le scanner : quatre des cinq paramètres surveillés sur l'IRM (distorsion\n        géométrique, épaisseur de coupe, uniformité, fantômage) s'obtiennent tous à partir d'une seule et même\n        acquisition d'un fantôme ACR, analysée par logiciel. Un seul investissement matériel (le fantôme) couvre\n        donc plusieurs paramètres à la fois, contrairement au scanner où chaque paramètre demandait un capteur\n        physique distinct.\n    </p>\n</div>\n<div class=\"table-wrap\" style=\"margin-bottom:18px;\">\n    <table>\n        <thead><tr><th>Paramètre</th><th>Capteur / méthode</th><th>Exemple de prix trouvé</th><th>Fiabilité de ce chiffre</th></tr></thead>\n        <tbody>\n            <tr>\n                <td>Niveau d'hélium de l'aimant</td>\n                <td>Sonde de niveau cryogénique (capacitive)</td>\n                <td class=\"mono\">Non trouvé (devis sur demande)</td>\n                <td class=\"muted\" style=\"font-size:12.5px;\">Les fabricants spécialisés dans l'instrumentation cryogénique (ex. American Magnetics) ne publient pas de prix en ligne pour ce type de sonde : il faut demander un devis. Je préfère le dire plutôt que d'inventer un chiffre.</td>\n            </tr>\n            <tr>\n                <td>Distorsion géométrique, épaisseur de coupe, uniformité, fantômage (les 4 ensemble)</td>\n                <td>Fantôme d'accréditation IRM de l'ACR + logiciel d'analyse d'image</td>\n                <td class=\"mono\">≈ 2 638 $ HT (modèle « large », un seul fantôme)</td>\n                <td class=\"muted\" style=\"font-size:12.5px;\">Prix réel relevé chez un revendeur de pièces d'imagerie médicale (PartsSource), pour le fantôme physique seul. Le logiciel d'analyse automatique des images (mesure des distances, de l'uniformité, du fantômage) reste un coût de développement à part, pas inclus dans ce prix.</td>\n            </tr>\n            <tr>\n                <td>Acquisition &amp; transmission</td>\n                <td>Passerelle réseau vers la base ino_biomed</td>\n                <td class=\"mono\">Même ordre de grandeur que pour le scanner</td>\n                <td class=\"muted\" style=\"font-size:12.5px;\">Même limite que pour le scanner : pas de prix actuel fiable trouvé, voir la ligne correspondante plus haut.</td>\n            </tr>\n        </tbody>\n    </table>\n</div>\n\n<div class=\"section-title\">Développement logiciel et intégration</div>\n<div class=\"card\" style=\"margin-bottom:18px;\">\n    <p>Remplacer <code class=\"mono\">genererLectureSimulee()</code> par de vraies lectures demanderait, pour\n    chaque équipement surveillé (scanner comme IRM), au minimum : un pilote ou une API pour lire chaque capteur\n    ou chaque analyse de fantôme, une passerelle qui pousse les valeurs vers la base <code class=\"mono\">ino_biomed</code>\n    (ce que fait déjà <code class=\"mono\">scripts/tick_monitoring.php</code>, juste avec de vraies données en\n    entrée au lieu de valeurs générées), et des tests de fiabilité avant mise en service clinique.</p>\n    <p class=\"muted\" style=\"font-size:12.5px;margin-top:10px;\">\n        Je n'ai pas de source chiffrée pour cette partie : c'est une estimation d'ingénierie personnelle, pas un\n        chiffre trouvé en ligne. À titre d'ordre de grandeur habituel pour ce type de projet (un prototype\n        fonctionnel, pas un dispositif médical certifié), je m'attendrais à plusieurs semaines de travail de\n        développement et d'intégration, sans compter les tests et la validation. À vérifier avec un vrai devis\n        avant de le citer comme chiffre ferme.\n    </p>\n</div>\n\n<div class=\"section-title\">Alternative réaliste : le contrat de télémétrie du fabricant</div>\n<div class=\"card\" style=\"margin-bottom:18px;\">\n    <p>Avant d'envisager de brancher des capteurs tiers sur un scanner ou une IRM, il faut regarder ce qui existe\n    déjà côté fabricant. Un article professionnel sur les contrats de service en imagerie\n    (<a href=\"https://radiologybusiness.com/topics/healthcare-management/healthcare-economics/ct-service-contracts-under-knife\" target=\"_blank\" rel=\"noopener\">Radiology Business, « CT Service Contracts: Under the Knife? »</a>)\n    donne des chiffres utiles pour situer le sujet, même s'il porte précisément sur les scanners (je n'ai pas\n    vérifié les mêmes pourcentages pour l'IRM) :</p>\n    <ul style=\"margin:10px 0 0 20px;font-size:13.5px;\">\n        <li style=\"margin-bottom:6px;\">Pour les scanners hospitaliers 64 coupes et plus, 84 % des contrats du fabricant (OEM) incluent déjà le diagnostic à distance, et environ deux tiers permettent une réparation à distance.</li>\n        <li style=\"margin-bottom:6px;\">L'article cite l'exemple concret d'un centre (Hackensack) où la télésurveillance du fabricant a détecté une surchauffe du tube, exactement le type d'alerte que simule ce prototype.</li>\n        <li style=\"margin-bottom:6px;\">Un contrat de service indépendant (ISO, hors fabricant) peut coûter environ 30 % de moins qu'un contrat fabricant, mais ces prestataires indépendants n'ont généralement pas accès à la télémétrie propriétaire du constructeur.</li>\n    </ul>\n    <p style=\"margin-top:10px;\">\n        Pour l'IRM, le principe est le même, et le niveau d'hélium en particulier est justement le genre de\n        paramètre que les fabricants surveillent déjà souvent à distance dans le cadre de leur contrat de\n        service, puisqu'une perte d'hélium non détectée peut mener à une perte de champ (« quench ») coûteuse à\n        réparer. Je n'ai pas trouvé de chiffre public spécifique à l'IRM pour confirmer un pourcentage comme pour\n        le scanner, donc je le présente comme une déduction logique, pas un fait vérifié.\n    </p>\n    <p style=\"margin-top:10px;\">\n        Autrement dit : pour un appareil déjà sous contrat avec son fabricant, la vraie télémétrie en temps réel\n        existe probablement déjà, via ce contrat, plutôt qu'en ajoutant des capteurs indépendants. Brancher des\n        capteurs tiers sur l'appareil pourrait par ailleurs entrer en conflit avec les clauses de garantie ou de\n        contrat de service (modification non autorisée de l'équipement). C'est un point à vérifier auprès du service\n        biomédical et du fabricant avant toute action physique sur le scanner ou l'IRM, pas seulement une question\n        de coût.\n    </p>\n</div>\n\n<div class=\"section-title\">Piste alternative : capture externe par caméra et capteurs clampés</div>\n<div class=\"card\" style=\"margin-bottom:18px;\">\n    <p>Une autre approche évite complètement de toucher à l'intérieur du scanner ou de l'IRM : installer une\n    caméra à l'extérieur de l'appareil, pointée sur un écran ou un cadran que l'appareil affiche déjà, et lire la\n    valeur par reconnaissance d'image plutôt que par un capteur électrique raccordé en interne. Comme rien n'est\n    ouvert ni modifié sur l'appareil, cette approche ne pose pas le problème de garantie ou de contrat de service\n    évoqué plus haut.</p>\n    <p style=\"margin-top:10px;\">Pour l'IRM, cette idée s'appuie sur un équipement réel déjà cité sur cette page :\n    l'instrument de niveau d'hélium AMI Model 1700 possède son propre écran tactile couleur de 4,3 pouces, monté\n    à l'extérieur du cryostat, justement pour que le technicien puisse lire le niveau sans toucher à l'aimant\n    (<a href=\"https://americanmagnetics.com/support/manuals/Model1700-Rev6.pdf\" target=\"_blank\" rel=\"noopener\">manuel American Magnetics, Model 1700</a>).\n    Une caméra pointée sur cet écran existant capturerait donc le même chiffre que celui déjà lu à l'œil par le\n    personnel, sans ajouter de capteur interne. Pour le scanner, je n'ai pas trouvé ni vérifié l'existence d'un\n    écran externe équivalent affichant la température du tube ou la position du portique : l'idée resterait à\n    confirmer auprès du service biomédical ou du fabricant.</p>\n    <p style=\"margin-top:10px;\">Ce n'est pas une idée isolée : des produits commerciaux existants font exactement\n    cela pour de l'équipement industriel, par exemple ServiceOCR Pro de Sensfix, qui lit des cadrans analogiques,\n    des afficheurs numériques et des écrans LCD avec une caméra fixe ou un smartphone, sans modification\n    matérielle de l'équipement surveillé\n    (<a href=\"https://sensfix.com/en/platform/service-ocr-pro\" target=\"_blank\" rel=\"noopener\">sensfix.com</a>).\n    Je n'ai pas trouvé d'exemple vérifié de ce produit utilisé sur de l'imagerie médicale, seulement sur de\n    l'équipement industriel et des compteurs. Sur le plan technique, ce module demanderait le même type de\n    traitement d'image que la page <a href=\"#/image\">Analyse d'image</a> de ce site, mais pour\n    reconnaître des chiffres sur un écran plutôt qu'une zone d'intérêt, ce qui resterait un développement à part\n    entière et pas une simple réutilisation du code existant.</p>\n</div>\n\n<div class=\"card\" style=\"margin-bottom:18px;\">\n    <p><strong>Idée complémentaire :</strong> un capteur clampé à l'extérieur d'un tuyau ou d'un circuit (eau,\n    liquide de refroidissement) pour détecter s'il est plein, partiellement rempli ou vide, sans percer ni ouvrir\n    le tuyau. Des produits réels existent dans cette catégorie précise de capteurs non invasifs montés à\n    l'extérieur d'un tube : le LVUN-600 d'Omega, qui se clipse sur un tube ou un tuyau à paroi épaisse de 6,4 à\n    152,4 mm de diamètre sans le percer\n    (<a href=\"https://au.omega.com/pptst/LVUN-600.html\" target=\"_blank\" rel=\"noopener\">omega.com</a>), et le\n    capteur EX-F1 de Panasonic, qui se fixe par sangle autour d'un petit tube transparent de 6 à 13 mm et détecte\n    le liquide par un faisceau infrarouge\n    (<a href=\"https://industry.panasonic.com/ap/en/products/fasys/sensor/photoelectric/number/ex-f1\" target=\"_blank\" rel=\"noopener\">panasonic.com</a>).\n    Aucun des deux ne précise son prix en ligne.</p>\n    <p style=\"margin-top:10px;\">Une précision honnête sur l'intuition de départ, qui parlait de vibrations : les\n    capteurs de niveau réellement basés sur la vibration (type \"fourche vibrante\", très courants dans\n    l'industrie) doivent normalement être en contact direct avec le liquide pour détecter le changement de\n    vibration quand ils sont mouillés, donc insérés dans le tuyau plutôt que clampés dessus de l'extérieur. Ce\n    n'est plus vraiment non invasif. Les deux produits clampés trouvés ici utilisent plutôt un signal optique à\n    travers la paroi du tube (Panasonic), ou un signal non précisé sur la page du fabricant (Omega), et d'autres\n    capteurs clampés du même genre utilisent un signal ultrasonore à travers la paroi. L'intuition d'utiliser un\n    signal physique qui traverse la paroi du tuyau depuis l'extérieur était la bonne direction ; le signal\n    réellement utilisé par les produits non invasifs trouvés ici est optique ou ultrasonore plutôt que\n    vibratoire.</p>\n</div>\n\n<p class=\"muted\" style=\"font-size:11.5px;\">\n    Je ne suis pas certaine que ces ordres de grandeur reflètent un vrai projet d'intégration hospitalière au\n    Maroc : les prix relevés viennent de distributeurs généralistes en ligne, pas d'un fournisseur biomédical\n    local, et peuvent ne plus être à jour. À présenter en soutenance comme une estimation de départ à affiner,\n    pas comme un budget validé.\n</p>";
+</script>
+<script>
+/* ===================================================================
+   Monitoring continu (simulation dans le navigateur).
+   Meme logique que la version PHP/MySQL : marche aleatoire avec retour
+   a la moyenne et derive, alertes, demande d'intervention automatique
+   en cas de niveau critique, boucle de reparation a la cloture de la
+   demande. Les VALEURS sont simulees. Les SEUILS sont de vraies
+   tolerances publiees (voir le champ "source" de chaque parametre).
+   =================================================================== */
+
+var MON_DEFS = {"1":{"ecart_helium":{"label":"Écart au niveau d'hélium nominal (aimant supraconducteur)","unite":"%","baseline":5,"volatilite":0.8,"sens":"haut","seuil_alerte":40,"seuil_critique":60,"qualification":true,"source_type":"estimation","tache_liee":"Vérifier le système de refroidissement et le niveau d'hélium de l'aimant, et contrôler la stabilité du niveau d'hélium (tâche de qualification de la checklist existante)","source":"Pas de norme publique unique trouvée pour ce seuil : le niveau de remplissage cible varie par fabricant. Une source professionnelle (Block Imaging, un prestataire de maintenance d'IRM) cite une plage usuelle de remplissage entre 40 % et 60 % selon le modèle, pas un seuil officiel unique. Seuils choisis ici par prudence dans cette fourchette (alerte à un déficit de 40 %, soit un niveau résiduel de 60 % ; critique à un déficit de 60 %, soit un niveau résiduel de 40 %), à vérifier avec le constructeur de l'appareil","capteur_reel":"Sonde de niveau cryogénique (capacitive ou résistive), déjà intégrée au cryostat de l'aimant supraconducteur par le fabricant. Ses relevés restent internes au logiciel de service et ne sont pas exposés à un système tiers."},"distorsion_geometrique":{"label":"Distorsion géométrique (précision et linéarité des gradients)","unite":"mm","baseline":0,"volatilite":0.08,"sens":"absolu","seuil_alerte":1.2,"seuil_critique":2,"qualification":false,"source_type":"reel","tache_liee":"Lié à la tâche de qualification « Contrôler l'homogénéité du champ magnétique » : la distorsion géométrique dépend directement de la linéarité des gradients et de l'homogénéité du champ, sans être exactement la même mesure","source":"AAPM Report No. 100 (section III.E, « Geometric Accuracy and Linearity ») : distorsion maximale tolérée de 2 mm avec le fantôme ACR (seuil critique réel ; alerte à 1,2 mm = marge de prudence ajoutée, pas une valeur du rapport)","capteur_reel":"Pas un capteur physique à l'unité : nécessite l'acquisition régulière d'un fantôme ACR (grille de distorsion) et une mesure logicielle automatique des distances sur l'image, comparées aux distances réelles du fantôme."},"precision_epaisseur_coupe":{"label":"Précision de l'épaisseur de coupe","unite":"%","baseline":2,"volatilite":0.6,"sens":"absolu","seuil_alerte":6,"seuil_critique":10,"qualification":false,"source_type":"reel","tache_liee":"Non couvert explicitement par la checklist actuelle de l'IRM (à ajouter : test fantôme ACR, épaisseur de coupe)","source":"AAPM Report No. 100 (section III.E, « Slice Thickness and Spacing ») : épaisseur mesurée tolérée à ± 10 % de l'épaisseur prescrite pour des coupes spin-écho de 5 mm ou plus (seuil critique réel ; alerte à 6 % = marge de prudence ajoutée)","capteur_reel":"Même fantôme ACR, muni d'une structure d'épaisseur connue (rampe inclinée), avec une mesure logicielle de l'épaisseur apparente sur l'image."},"deficit_uniformite":{"label":"Déficit d'uniformité d'image (PIU) par rapport à la cible ACR","unite":"%","baseline":5,"volatilite":0.7,"sens":"haut","seuil_alerte":6,"seuil_critique":10,"qualification":false,"source_type":"reel","tache_liee":"Non couvert explicitement par la checklist actuelle de l'IRM (à ajouter : test fantôme ACR, uniformité d'image)","source":"AAPM Report No. 100 (section III.E, « Percent Image Uniformity ») : uniformité (PIU) attendue à au moins 90 % avec une antenne tête volumique sur un appareil à 2 T ou moins, soit un déficit maximal toléré de 10 points (seuil critique réel ; alerte à 6 points = marge de prudence ajoutée)","capteur_reel":"Même fantôme ACR (grande sphère d'eau) et calcul logiciel automatique de l'écart d'intensité entre la zone la plus et la moins intense d'une région d'intérêt de l'image."},"fantomage_signal":{"label":"Fantômage du signal (ghosting)","unite":"%","baseline":0.3,"volatilite":0.12,"sens":"haut","seuil_alerte":0.6,"seuil_critique":1,"qualification":false,"source_type":"reel","tache_liee":"Non couvert explicitement par la checklist actuelle de l'IRM (à ajouter : test fantôme ACR, fantômage)","source":"AAPM Report No. 100 (section III.E\/III.F, « Percent Signal Ghosting ») : ratio de fantômage toléré à 1 % maximum avec les paramètres T1 du protocole ACR (seuil critique réel ; alerte à 0,6 % = marge de prudence ajoutée)","capteur_reel":"Même fantôme ACR, avec une mesure logicielle du signal résiduel (fantôme) en dehors de l'objet principal, dans des régions d'intérêt prédéfinies hors du champ utile."}},"2":{"temp_tube":{"label":"Température du tube à rayons X","unite":"°C","baseline":38,"volatilite":1.1,"sens":"haut","seuil_alerte":55,"seuil_critique":65,"qualification":false,"source_type":"estimation","tache_liee":"Vérifier le tube à rayons X, les détecteurs et le portique (gantry)","source":"Estimation d'ingénierie, aucune norme publique trouvée (donnée thermique interne propriétaire du fabricant)","capteur_reel":"Sonde thermocouple ou RTD (PT100), fixée sur le bloc tube\/détecteurs et reliée à un module d'acquisition analogique-numérique. Ce capteur existe déjà à l'intérieur de la plupart des scanners cliniques, mais ses relevés restent internes au logiciel du fabricant et ne sont pas exposés à un système tiers."},"ecart_vitesse_portique":{"label":"Écart angulaire de rotation du portique (gantry)","unite":"°","baseline":0,"volatilite":0.05,"sens":"absolu","seuil_alerte":0.6,"seuil_critique":1,"qualification":false,"source_type":"reel","tache_liee":"Vérifier le tube à rayons X, les détecteurs et le portique (gantry)","source":"AAPM Report 83 \/ TG-66 (Mutic et al., Med. Phys. 2003), §IV.A.4, rotation du portique exacte à 1° près (seuil critique réel ; le seuil d'alerte à 0,6° est une marge de prudence ajoutée, pas une valeur de la norme)","capteur_reel":"Codeur rotatif (encodeur optique ou magnétique), monté sur l'axe du moteur d'entraînement du portique, mesurant l'angle réellement parcouru pour le comparer à la consigne envoyée au moteur."},"precision_table":{"label":"Précision de positionnement de la table motorisée","unite":"mm","baseline":0.2,"volatilite":0.035,"sens":"haut","seuil_alerte":0.6,"seuil_critique":1,"qualification":false,"source_type":"reel","tache_liee":"Tester le déplacement de la table motorisée et l'acquisition hélicoïdale","source":"AAPM Report 83 \/ TG-66, Tableau II, déplacement\/indexation de la table exact à 1 mm près (seuil critique réel ; alerte à 0,6 mm = marge de prudence ajoutée)","capteur_reel":"Codeur linéaire (règle optique) le long du rail de la table, ou retour de position directement lu sur le servomoteur\/moteur pas à pas qui l'entraîne."},"derive_hu":{"label":"Dérive de calibration (fantôme eau, cible 0 HU)","unite":"HU","baseline":0,"volatilite":0.35,"sens":"absolu","seuil_alerte":5,"seuil_critique":7,"qualification":true,"source_type":"reel","tache_liee":"Contrôler la calibration des unités Hounsfield (HU) par rapport aux valeurs de référence","source":"AAPM Report 83 \/ TG-66, Tableau III (0 HU ± 5, contrôle quotidien) et Programme d'accréditation TDM de l'ACR (0 HU ± 7 toléré, ± 5 préféré), les deux seuils sont les valeurs réelles publiées","capteur_reel":"Pas un capteur mécanique : nécessite l'acquisition régulière d'un fantôme eau étalonné et une extraction logicielle automatique de la valeur HU moyenne dans une région d'intérêt de l'image, comparée à la cible 0 HU."},"reproductibilite_plan":{"label":"Reproductibilité de la position du plan de coupe","unite":"mm","baseline":0.1,"volatilite":0.04,"sens":"haut","seuil_alerte":0.6,"seuil_critique":1,"qualification":false,"source_type":"reel","tache_liee":"Vérifier la reproductibilité du plan de coupe utilisé pour la planification en radiothérapie","source":"AAPM Report 83 \/ TG-66, Tableau II\/III, localisation de coupe à partir du scout et intégrité spatiale dans le plan, exactes à 1 mm près (seuil critique réel ; alerte à 0,6 mm = marge de prudence ajoutée)","capteur_reel":"Combine les mêmes codeurs (portique, table) avec un fantôme de localisation à billes radio-opaques et une analyse d'image automatisée de leur position d'une acquisition à l'autre."}}};
+var MON_IDS = ['1', '2'];
+
+var STORE_KEY = 'biomed_state_v1';
+var S = null;
+
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+function fmtDate(d) {
+  return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()) + ' ' +
+    pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds());
+}
+function fmtDay(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+
+function newState() {
+  return { seeded: false, readings: { '1': {}, '2': {} }, alerts: [], actions: [], di: [],
+           active: { '1': true, '2': true }, statut: {}, derive: {}, nextId: 1 };
+}
+function saveState() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch (e) { /* stockage indisponible : l'etat reste en memoire */ }
+}
+function loadState() {
+  try {
+    var raw = localStorage.getItem(STORE_KEY);
+    if (raw) { S = JSON.parse(raw); return; }
+  } catch (e) { /* ignore */ }
+  S = newState();
+}
+function resetState() {
+  S = newState();
+  seedState();
+  saveState();
+}
+
+function gauss() { return (Math.random() + Math.random() + Math.random()) - 1.5; }
+function randInt(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+function round3(x) { return Math.round(x * 1000) / 1000; }
+
+function niveauDe(v, def) {
+  var ref = def.sens === 'absolu' ? Math.abs(v) : v;
+  if (ref >= def.seuil_critique) return 'critique';
+  if (ref >= def.seuil_alerte) return 'alerte';
+  return 'normal';
+}
+
+function lastReading(eq, p) {
+  var arr = (S.readings[eq] || {})[p] || [];
+  return arr.length ? arr[arr.length - 1] : null;
+}
+
+function nextId() { return S.nextId++; }
+
+function repairIfClosed(eq, p, def) {
+  for (var i = S.alerts.length - 1; i >= 0; i--) {
+    var a = S.alerts[i];
+    if (a.eq == eq && a.param === p && a.statut !== 'resolue' && a.di) {
+      var di = S.di.filter(function (d) { return d.id === a.di; })[0];
+      if (di && di.statut === 'cloturee') {
+        a.statut = 'resolue';
+        return def.baseline + gauss() * def.volatilite * 0.3;
+      }
+      return null;
+    }
+  }
+  return null;
+}
+
+function manageAlert(eq, p, def, valeur, niveau, t) {
+  var open = null;
+  for (var i = S.alerts.length - 1; i >= 0; i--) {
+    var a = S.alerts[i];
+    if (a.eq == eq && a.param === p && (a.statut === 'ouverte' || a.statut === 'acquittee')) { open = a; break; }
+  }
+  if (niveau === 'normal') { if (open) open.statut = 'resolue'; return; }
+
+  var seuil = niveau === 'critique' ? def.seuil_critique : def.seuil_alerte;
+  var message = def.label + ' : ' + valeur + ' ' + def.unite + ' (seuil ' + (niveau === 'critique' ? 'critique' : 'alerte') + ' : ' + seuil + def.unite + ')';
+  var alerte;
+  if (open) {
+    open.niveau = niveau; open.message = message; open.t = t;
+    alerte = open;
+  } else {
+    alerte = { id: nextId(), eq: eq, param: p, niveau: niveau, message: message, t: t, statut: 'ouverte', di: null };
+    S.alerts.push(alerte);
+  }
+  if (niveau === 'critique' && !alerte.di) {
+    var desc = 'Générée automatiquement par le monitoring continu (simulation) : ' + message +
+      '. Tâche de checklist concernée : ' + def.tache_liee + '.';
+    var di = { id: nextId(), eq: eq, date: t.slice(0, 10), description: desc, urgence: 'urgente', statut: 'ouverte', auto: true };
+    S.di.push(di);
+    alerte.di = di.id;
+  }
+}
+
+function tickEquipment(eq, t) {
+  var defs = MON_DEFS[eq];
+  if (!defs) return false;
+  if (!S.active[eq]) return false;
+  var stamp = t || fmtDate(new Date());
+  Object.keys(defs).forEach(function (p) {
+    var def = defs[p];
+    var rep = repairIfClosed(eq, p, def);
+    var last, lastNiv;
+    if (rep !== null) { last = rep; lastNiv = 'normal'; if (S.derive[eq] === p) S.derive[eq] = null; }
+    else {
+      var lr = lastReading(eq, p);
+      last = lr ? lr.v : def.baseline;
+      lastNiv = lr ? lr.n : 'normal';
+    }
+    var pas = gauss() * def.volatilite;
+    var retour = (def.baseline - last) * 0.05;
+    var derive = 0;
+    var chance = lastNiv === 'normal' ? 15 : 45;
+    if (randInt(1, 100) <= chance) {
+      var sens = def.sens === 'haut' ? 1 : (randInt(0, 1) ? 1 : -1);
+      var amp = lastNiv === 'normal' ? randInt(150, 350) : randInt(200, 500);
+      derive = sens * def.volatilite * (amp / 100);
+    }
+    var forced = 0;
+    if (S.derive[eq] === p) { forced = def.volatilite * 2.5; }
+    var nouvelle = last + pas + retour + derive + forced;
+    if (def.sens === 'haut' && nouvelle < 0) nouvelle = 0;
+    nouvelle = round3(nouvelle);
+    var niv = niveauDe(nouvelle, def);
+    if (S.derive[eq] === p && niv === 'critique') S.derive[eq] = null;
+    if (!S.readings[eq][p]) S.readings[eq][p] = [];
+    S.readings[eq][p].push({ t: stamp, v: nouvelle, n: niv });
+    if (S.readings[eq][p].length > 120) S.readings[eq][p].shift();
+    manageAlert(eq, p, def, nouvelle, niv, stamp);
+  });
+  return true;
+}
+
+function seedState() {
+  var now = Date.now();
+  var n = 36;
+  for (var i = 0; i < n; i++) {
+    var stamp = fmtDate(new Date(now - (n - i) * 10 * 60000));
+    MON_IDS.forEach(function (eq) { tickEquipment(eq, stamp); });
+  }
+  S.seeded = true;
+}
+
+function initMonitoring() {
+  loadState();
+  if (!S.seeded) { seedState(); saveState(); }
+}
+
+function latestLevels(eq) {
+  var defs = MON_DEFS[eq] || {};
+  var out = {};
+  Object.keys(defs).forEach(function (p) { out[p] = lastReading(eq, p); });
+  return out;
+}
+
+function monitoringBonus(eq) {
+  var defs = MON_DEFS[eq];
+  if (!defs) return { bonus: 0, pire: null };
+  var pire = 'normal';
+  var lv = latestLevels(eq);
+  Object.keys(lv).forEach(function (p) {
+    var n = lv[p] ? lv[p].n : 'normal';
+    if (n === 'critique') pire = 'critique';
+    else if (n === 'alerte' && pire !== 'critique') pire = 'alerte';
+  });
+  return { bonus: pire === 'critique' ? 25 : (pire === 'alerte' ? 12 : 0), pire: pire };
+}
+
+/* ---- Courbe SVG (meme trace que la version PHP) ---- */
+function courbeSvg(hist, def, w, h) {
+  w = w || 300; h = h || 84;
+  var n = hist.length;
+  if (n < 2) return '<p class="muted" style="font-size:12px;">Pas encore assez de lectures pour tracer une courbe.</p>';
+  var vals = hist.map(function (l) { return l.v; });
+  var sA = def.seuil_alerte, sC = def.seuil_critique, abs = def.sens === 'absolu';
+  var max = Math.max.apply(null, vals.concat([sC]));
+  var min = abs ? Math.min.apply(null, vals.concat([-sC, 0])) : 0;
+  if (abs) { max = Math.max(max, Math.abs(min)); min = -max; }
+  var marge = (max - min) * 0.12; if (marge <= 0) marge = 1;
+  max += marge; if (abs) min -= marge;
+  var padL = 3, padR = 3, padT = 6, padB = 6;
+  var plotW = w - padL - padR, plotH = h - padT - padB, range = (max - min) || 1;
+  function xDe(i) { return padL + (i / (n - 1)) * plotW; }
+  function yDe(v) { return padT + plotH - ((v - min) / range) * plotH; }
+  var col = { normal: 'var(--sage)', alerte: 'var(--amber)', critique: 'var(--red)' };
+  var pts = [], circ = '';
+  hist.forEach(function (l, i) {
+    var px = Math.round(xDe(i) * 10) / 10, py = Math.round(yDe(l.v) * 10) / 10;
+    pts.push(px + ',' + py);
+    circ += '<circle cx="' + px + '" cy="' + py + '" r="2" fill="' + (col[l.n] || 'var(--rose-deep)') + '"><title>' + l.t + ' : ' + l.v + ' ' + def.unite + '</title></circle>';
+  });
+  var lignes = '';
+  (abs ? [sA, -sA, sC, -sC] : [sA, sC]).forEach(function (sv) {
+    if (sv < min || sv > max) return;
+    var sy = Math.round(yDe(sv) * 10) / 10;
+    lignes += '<line x1="' + padL + '" y1="' + sy + '" x2="' + (w - padR) + '" y2="' + sy + '" stroke="var(--ink-light)" stroke-opacity=".55" stroke-width="1" stroke-dasharray="3,3" />';
+  });
+  return '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="' + h + '" preserveAspectRatio="none" style="display:block;">' +
+    lignes + '<polyline points="' + pts.join(' ') + '" fill="none" stroke="var(--rose-deep)" stroke-width="1.5" />' + circ + '</svg>';
+}
+
+/* ---- Actions "a distance" ---- */
+function monActionLog(eq, type, detail) {
+  S.actions.unshift({ eq: eq, type: type, detail: detail, t: fmtDate(new Date()) });
+  if (S.actions.length > 60) S.actions.pop();
+}
+function monPauseReprise(eq, actif) {
+  S.active[eq] = actif;
+  monActionLog(eq, actif ? 'reprise' : 'pause', actif ? 'Monitoring repris à distance.' : 'Monitoring mis en pause à distance.');
+  saveState();
+}
+function monAcquitter(alerteId) {
+  var a = S.alerts.filter(function (x) { return x.id === alerteId; })[0];
+  if (!a) return;
+  a.statut = 'acquittee';
+  monActionLog(a.eq, 'acquittement', 'Alerte acquittée : ' + a.message);
+  saveState();
+}
+function monDiagnostic(eq) {
+  var defs = MON_DEFS[eq], lignes = [];
+  Object.keys(defs).forEach(function (p) {
+    var l = lastReading(eq, p), def = defs[p];
+    if (!l) { lignes.push(def.label + ' : aucune lecture disponible.'); return; }
+    var etat = l.n === 'normal' ? 'dans la plage normale' : (l.n === 'alerte' ? 'en alerte' : 'en seuil critique');
+    lignes.push(def.label + ' : ' + l.v + ' ' + def.unite + ', ' + etat + '.');
+  });
+  var texte = 'Diagnostic à distance (simulation) du ' + fmtDate(new Date()) + ' :\n- ' + lignes.join('\n- ');
+  monActionLog(eq, 'diagnostic_distance', texte);
+  saveState();
+  return texte;
+}
+function monForcerDerive(eq) {
+  var defs = MON_DEFS[eq];
+  var cles = Object.keys(defs);
+  var p = cles[randInt(0, cles.length - 1)];
+  S.derive[eq] = p;
+  monActionLog(eq, 'derive_demo', 'Dérive provoquée pour la démonstration sur : ' + defs[p].label);
+  saveState();
+  return p;
+}
+function cloturerDI(id) {
+  var d = S.di.filter(function (x) { return x.id === id; })[0];
+  if (d) { d.statut = 'cloturee'; saveState(); }
+}
+
+/* ===================== Analyse d'image : seuillage d'Otsu ===================== */
+function otsuSeuil(hist, total) {
+  var sommeTotale = 0, i;
+  for (i = 0; i < 256; i++) sommeTotale += i * hist[i];
+  var sommeFond = 0, poidsFond = 0, meilleureVar = -1, meilleurSeuil = 127;
+  for (var t = 0; t < 256; t++) {
+    poidsFond += hist[t];
+    if (poidsFond === 0) continue;
+    var poidsPP = total - poidsFond;
+    if (poidsPP === 0) break;
+    sommeFond += t * hist[t];
+    var mF = sommeFond / poidsFond;
+    var mP = (sommeTotale - sommeFond) / poidsPP;
+    var v = poidsFond * poidsPP * Math.pow(mF - mP, 2);
+    if (v > meilleureVar) { meilleureVar = v; meilleurSeuil = t; }
+  }
+  return meilleurSeuil;
+}
+
+function plusGrandeComposante(masque, w, h) {
+  var total = w * h;
+  var visite = new Uint8Array(total);
+  var minT = Math.max(20, Math.floor(total * 0.005));
+  var maxT = Math.floor(total * 0.70);
+  var meilleure = null, meilleureT = 0;
+  var pile = new Int32Array(total);
+  for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++) {
+      var idx = y * w + x;
+      if (masque[idx] !== 1 || visite[idx]) continue;
+      var sp = 0; pile[sp++] = idx; visite[idx] = 1;
+      var minX = x, maxX = x, minY = y, maxY = y, taille = 0;
+      while (sp > 0) {
+        var c = pile[--sp];
+        var cx = c % w, cy = (c - cx) / w;
+        taille++;
+        if (cx < minX) minX = cx; if (cx > maxX) maxX = cx;
+        if (cy < minY) minY = cy; if (cy > maxY) maxY = cy;
+        if (cx + 1 < w) { var n1 = c + 1; if (masque[n1] === 1 && !visite[n1]) { visite[n1] = 1; pile[sp++] = n1; } }
+        if (cx > 0) { var n2 = c - 1; if (masque[n2] === 1 && !visite[n2]) { visite[n2] = 1; pile[sp++] = n2; } }
+        if (cy + 1 < h) { var n3 = c + w; if (masque[n3] === 1 && !visite[n3]) { visite[n3] = 1; pile[sp++] = n3; } }
+        if (cy > 0) { var n4 = c - w; if (masque[n4] === 1 && !visite[n4]) { visite[n4] = 1; pile[sp++] = n4; } }
+      }
+      if (taille >= minT && taille <= maxT && taille > meilleureT) {
+        meilleureT = taille;
+        meilleure = { x: minX, y: minY, w: maxX - minX + 1, h: maxY - minY + 1, taille: taille };
+      }
+    }
+  }
+  return meilleure;
+}
+
+function analyserImage(source, W, H) {
+  var maxL = 300;
+  var echelle = W > maxL ? maxL / W : 1;
+  var w = Math.max(1, Math.round(W * echelle));
+  var h = Math.max(1, Math.round(H * echelle));
+  var c = document.createElement('canvas'); c.width = w; c.height = h;
+  var ctx = c.getContext('2d');
+  ctx.drawImage(source, 0, 0, w, h);
+  var d = ctx.getImageData(0, 0, w, h).data;
+  var gris = new Int32Array(w * h), hist = new Array(256).fill(0);
+  for (var i = 0; i < w * h; i++) {
+    var l = Math.round(0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2]);
+    gris[i] = l; hist[l]++;
+  }
+  var seuil = otsuSeuil(hist, w * h);
+  var nbAu = 0;
+  for (i = 0; i < w * h; i++) if (gris[i] >= seuil) nbAu++;
+  var ppAuDessus = nbAu < (w * h - nbAu);
+  var masque = new Uint8Array(w * h);
+  for (i = 0; i < w * h; i++) masque[i] = ((gris[i] >= seuil) === ppAuDessus) ? 1 : 0;
+  var comp = plusGrandeComposante(masque, w, h);
+  if (!comp) return { detectee: false, seuil: seuil, w: w, h: h };
+  var sZ = 0, nZ = 0, sF = 0, nF = 0;
+  for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++) {
+      var k = y * w + x;
+      var dedans = x >= comp.x && x < comp.x + comp.w && y >= comp.y && y < comp.y + comp.h && masque[k] === 1;
+      if (dedans) { sZ += gris[k]; nZ++; } else { sF += gris[k]; nF++; }
+    }
+  }
+  var iZ = nZ ? sZ / nZ : 0, iF = nF ? sF / nF : 0;
+  return {
+    detectee: true, seuil: seuil, w: w, h: h,
+    bbox: { x: Math.round(comp.x / echelle), y: Math.round(comp.y / echelle), w: Math.round(comp.w / echelle), h: Math.round(comp.h / echelle) },
+    aire: Math.round(comp.taille / (w * h) * 1000) / 10,
+    iZ: Math.round(iZ * 10) / 10, iF: Math.round(iF * 10) / 10,
+    contraste: Math.round(Math.abs(iZ - iF) * 10) / 10
+  };
+}
+
+function rngSeed(seed) { var s = seed; return function () { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; }
+
+function initImagePage() {
+  var cv = document.getElementById('img-canvas');
+  var cctx = cv.getContext('2d');
+  var resBox = document.getElementById('img-result');
+
+  function traiter(source, W, H) {
+    cv.width = W; cv.height = H;
+    cctx.drawImage(source, 0, 0, W, H);
+    var r = analyserImage(source, W, H);
+    if (r.detectee) {
+      cctx.strokeStyle = '#e0306e';
+      cctx.lineWidth = Math.max(3, Math.round(W / 120));
+      cctx.strokeRect(r.bbox.x, r.bbox.y, r.bbox.w, r.bbox.h);
+      resBox.innerHTML =
+        '<table>' +
+        '<tr><td class="muted">Zone repérée</td><td class="mono">x: ' + r.bbox.x + ', y: ' + r.bbox.y + ' &middot; ' + r.bbox.w + '&times;' + r.bbox.h + ' px</td></tr>' +
+        '<tr><td class="muted">Part de l\'image couverte</td><td><strong>' + r.aire + ' %</strong></td></tr>' +
+        '<tr><td class="muted">Intensité moyenne de la zone</td><td class="mono">' + r.iZ + ' / 255</td></tr>' +
+        '<tr><td class="muted">Intensité moyenne du fond</td><td class="mono">' + r.iF + ' / 255</td></tr>' +
+        '<tr><td class="muted">Contraste zone / fond</td><td class="mono">' + r.contraste + '</td></tr>' +
+        '<tr><td class="muted">Seuil d\'Otsu calculé</td><td class="mono">' + r.seuil + ' / 255</td></tr>' +
+        '<tr><td class="muted">Résolution analysée</td><td class="mono">' + r.w + '&times;' + r.h + ' px</td></tr>' +
+        '</table>' +
+        '<p class="muted" style="font-size:12px;margin-top:12px;">Ces chiffres sont calculés directement à partir des pixels de l\'image envoyée, pas simulés. Ils décrivent une propriété géométrique et de contraste de l\'image, pas un diagnostic.</p>';
+    } else {
+      resBox.innerHTML =
+        '<table><tr><td class="muted">Zone repérée</td><td>Aucune région distincte détectée</td></tr>' +
+        '<tr><td class="muted">Seuil d\'Otsu calculé</td><td class="mono">' + r.seuil + ' / 255</td></tr>' +
+        '<tr><td class="muted">Résolution analysée</td><td class="mono">' + r.w + '&times;' + r.h + ' px</td></tr></table>' +
+        '<p class="muted" style="font-size:12px;margin-top:12px;">Aucune région connexe de taille raisonnable ne se détache du fond (ni trop petite ni couvrant presque toute l\'image). L\'image est peut-être relativement uniforme.</p>';
+    }
+  }
+
+  document.getElementById('img-file').addEventListener('change', function (e) {
+    var f = e.target.files[0];
+    if (!f) return;
+    var url = URL.createObjectURL(f);
+    var im = new Image();
+    im.onload = function () { traiter(im, im.naturalWidth, im.naturalHeight); URL.revokeObjectURL(url); };
+    im.onerror = function () { resBox.textContent = 'Impossible de lire cette image. Utilisez un fichier JPG ou PNG.'; };
+    im.src = url;
+  });
+
+  function exemple(type) {
+    var W = 400, H = 300, c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    var x = c.getContext('2d'), rand = rngSeed(type === 1 ? 7 : 42);
+    x.fillStyle = type === 1 ? 'rgb(30,30,30)' : 'rgb(120,120,120)';
+    x.fillRect(0, 0, W, H);
+    if (type === 1) {
+      var g = x.createRadialGradient(215, 135, 10, 215, 135, 70);
+      g.addColorStop(0, 'rgb(235,235,235)'); g.addColorStop(1, 'rgb(190,190,190)');
+      x.fillStyle = g;
+      x.beginPath(); x.ellipse(215, 135, 65, 50, 0.4, 0, Math.PI * 2); x.fill();
+    }
+    var im = x.getImageData(0, 0, W, H), d = im.data;
+    for (var i = 0; i < d.length; i += 4) {
+      var n = Math.round((rand() - 0.5) * (type === 1 ? 24 : 8));
+      d[i] = Math.max(0, Math.min(255, d[i] + n));
+      d[i + 1] = Math.max(0, Math.min(255, d[i + 1] + n));
+      d[i + 2] = Math.max(0, Math.min(255, d[i + 2] + n));
+    }
+    x.putImageData(im, 0, 0);
+    traiter(c, W, H);
+  }
+  document.getElementById('ex1').addEventListener('click', function () { exemple(1); });
+  document.getElementById('ex2').addEventListener('click', function () { exemple(2); });
+}
+
+/* ===================== Prédiction : régression logistique ===================== */
+var MODELE = {
+  noms: ["Température de l'air", 'Température du process', 'Vitesse de rotation', 'Couple', "Usure de l'outil", 'Type L', 'Type M'],
+  coef: [1.963943, -1.403247, 1.804496, 2.522511, 0.918044, 0.77798, 0.328194],
+  intercept: -2.169653879380682,
+  moyenne: [300.00545, 310.006062, 1539.356875, 40.003362, 107.685],
+  echelle: [1.996719, 1.479339, 180.971631, 10.018919, 63.608026]
+};
+
+function predire(v, type) {
+  var contrib = [], z = MODELE.intercept;
+  for (var i = 0; i < 5; i++) {
+    var s = (v[i] - MODELE.moyenne[i]) / MODELE.echelle[i];
+    var c = MODELE.coef[i] * s;
+    contrib.push(c); z += c;
+  }
+  var cL = type === 'L' ? MODELE.coef[5] : 0;
+  var cM = type === 'M' ? MODELE.coef[6] : 0;
+  contrib.push(cL, cM); z += cL + cM;
+  return { p: 1 / (1 + Math.exp(-z)), contrib: contrib };
+}
+
+function initPredPage() {
+  var ids = ['p-air', 'p-proc', 'p-rpm', 'p-torque', 'p-wear'];
+  function maj() {
+    var v = ids.map(function (id) { return parseFloat(document.getElementById(id).value); });
+    if (v.some(function (x) { return isNaN(x); })) return;
+    var r = predire(v, document.getElementById('p-type').value);
+    var pct = Math.round(r.p * 1000) / 10;
+    document.getElementById('p-score').textContent = pct + ' %';
+    var g = document.getElementById('p-gauge');
+    g.style.width = pct + '%';
+    var niveau, couleur;
+    if (r.p >= 0.5) { niveau = 'Risque élevé : le modèle déclenche une alerte (seuil 50 %).'; couleur = 'var(--red)'; }
+    else if (r.p >= 0.25) { niveau = 'Risque moyen : à surveiller.'; couleur = 'var(--amber)'; }
+    else { niveau = 'Risque faible.'; couleur = 'var(--sage)'; }
+    g.style.background = couleur;
+    document.getElementById('p-level').textContent = niveau;
+    var maxAbs = Math.max.apply(null, r.contrib.map(Math.abs).concat([0.5]));
+    var html = '';
+    for (var i = 0; i < r.contrib.length; i++) {
+      var c = r.contrib[i], w = Math.abs(c) / maxAbs * 50;
+      var left = c >= 0 ? 50 : 50 - w;
+      html += '<div style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px">' +
+        '<div style="width:150px">' + MODELE.noms[i] + '</div>' +
+        '<div style="flex:1;position:relative;height:10px;background:var(--rose-pale);border-radius:99px;overflow:hidden">' +
+        '<span style="position:absolute;top:0;bottom:0;left:' + left + '%;width:' + w + '%;background:' + (c >= 0 ? 'var(--rose-deep)' : 'var(--sage)') + '"></span>' +
+        '<i style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--ink-light)"></i></div>' +
+        '<div class="mono" style="width:46px;text-align:right">' + (c >= 0 ? '+' : '') + c.toFixed(2) + '</div></div>';
+    }
+    document.getElementById('p-contrib').innerHTML = html;
+  }
+  ids.concat(['p-type']).forEach(function (id) { document.getElementById(id).addEventListener('input', maj); });
+  function preset(vals, type) {
+    ids.forEach(function (id, i) { document.getElementById(id).value = vals[i]; });
+    document.getElementById('p-type').value = type;
+    maj();
+  }
+  document.getElementById('p-normal').addEventListener('click', function () { preset([300, 310, 1500, 40, 50], 'M'); });
+  document.getElementById('p-charge').addEventListener('click', function () { preset([302.5, 311, 1400, 55, 200], 'L'); });
+  maj();
+}
+
+/* ===================================================================
+   Pages du site statique. Aucun serveur : les données viennent de
+   data.js, l'état du monitoring est gardé dans le navigateur.
+   =================================================================== */
+
+var D = DATA;
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+}
+var SVC = {}, EQ = {};
+D.services.forEach(function (s) { SVC[s.id] = s; });
+D.equipements.forEach(function (e) { EQ[e.id] = e; });
+
+var STATUT_LABEL = { en_service: 'En service', en_panne: 'En panne', en_maintenance: 'En maintenance', hors_service: 'Hors service',
+  resolue: 'Résolue', en_attente_piece: 'En attente de pièce', en_attente_fournisseur: 'En attente fournisseur', ouverte: 'Ouverte', cloturee: 'Clôturée', acquittee: 'Acquittée' };
+var STATUT_BADGE = { en_service: 'badge-service', en_panne: 'badge-panne', en_maintenance: 'badge-maint', hors_service: 'badge-hs' };
+var INT_LABEL = { elevee: 'Usage élevé', moyenne: 'Usage moyen', faible: 'Usage faible' };
+var INT_BADGE = { elevee: 'badge-rose', moyenne: 'badge-maint', faible: 'badge-hs' };
+var NIV_LABEL = { normal: 'Normal', alerte: 'Alerte', critique: 'Critique' };
+var NIV_CLASS = { normal: 'badge-service', alerte: 'badge-maint', critique: 'badge-panne' };
+
+function statutDe(eq) { return S.statut[eq.id] || eq.statut; }
+function isMonitored(id) { return !!MON_DEFS[String(id)]; }
+function nomsSvc(id) { return SVC[id] ? SVC[id].nom : ''; }
+
+function checklistDe(eqId) {
+  var c = D.checklists.filter(function (x) { return x.equipement_id === eqId; })[0];
+  if (!c) c = D.checklists.filter(function (x) { return x.equipement_id == null; })[0];
+  return c;
+}
+function tachesDe(clId) { return D.taches.filter(function (t) { return t.checklist_id === clId; }); }
+
+/* ---------- Score de risque (formule transparente) ---------- */
+function riskScore(eq) {
+  var iv = D.interventions.filter(function (i) { return i.equipement_id === eq.id; });
+  var nbCorr = iv.filter(function (i) { return i.type === 'corrective'; }).length;
+  var derniere = null;
+  iv.forEach(function (i) { if (!derniere || i.date_intervention > derniere) derniere = i.date_intervention; });
+  var jours = derniere ? Math.floor((Date.now() - new Date(derniere).getTime()) / 86400000) : 365;
+  var score = Math.min(40, nbCorr * 10) + Math.min(30, Math.floor(jours / 10));
+  var st = statutDe(eq);
+  score += st === 'en_panne' ? 30 : (st === 'en_maintenance' ? 15 : 0);
+  score += monitoringBonus(String(eq.id)).bonus;
+  return Math.min(100, score);
+}
+function riskLevel(sc) {
+  if (sc >= 66) return { label: 'Risque élevé', cls: 'risk-high' };
+  if (sc >= 33) return { label: 'Risque moyen', cls: 'risk-medium' };
+  return { label: 'Risque faible', cls: 'risk-low' };
+}
+
+function pageHead(titre, sous) {
+  return '<div class="topbar"><div><h1>' + esc(titre) + '</h1><div class="breadcrumb">' + esc(sous || '') + '</div></div></div>';
+}
+function wrap(titre, sous, body) { return pageHead(titre, sous) + '<div class="content">' + body + '</div>'; }
+
+/* ====================== ACCUEIL (portfolio) ====================== */
+function pageAccueil() {
+  var nbEq = D.equipements.length, nbSv = D.services.length, nbIv = D.interventions.length;
+  var nbCl = D.checklists.filter(function (c) { return c.equipement_id != null; }).length;
+  var nbT = D.taches.length;
+  var h = '';
+  h += '<div class="hero-home"><h1 class="display">Biomed</h1>' +
+    '<p>Un projet étudiant d\'ingénierie biomédicale pour suivre l\'état d\'un parc d\'équipements hospitaliers, surveiller en continu leurs paramètres de qualité et anticiper les pannes.</p>' +
+    '<p class="muted" style="font-size:13px;">Cette version en ligne est une copie statique du site complet : tout fonctionne dans le navigateur, sans connexion ni base de données. Aucun rôle : tout est directement accessible.</p></div>';
+
+  h += '<div class="section-title" style="margin-top:6px;">Les trois axes du projet</div><div class="grid grid-3">' +
+    '<div class="card"><h3>1. Monitoring continu</h3><p class="muted" style="margin:8px 0 12px;">Suivi simulé de 5 paramètres de qualité pour le scanner et pour l\'IRM : courbes, seuils réels publiés, alertes, demande d\'intervention automatique, actions à distance.</p><a class="btn btn-primary btn-sm" href="#/monitoring/2">Ouvrir le monitoring</a></div>' +
+    '<div class="card"><h3>2. Prédiction</h3><p class="muted" style="margin:8px 0 12px;">Un score de risque par équipement (formule transparente) et un modèle entraîné sur de vraies pannes industrielles, utilisable en direct.</p><a class="btn btn-primary btn-sm" href="#/prediction">Ouvrir la prédiction</a></div>' +
+    '<div class="card"><h3>3. Analyse d\'image</h3><p class="muted" style="margin:8px 0 12px;">Seuillage d\'Otsu et repérage de la zone la plus contrastée, calculés sur l\'image que vous envoyez (elle reste dans votre navigateur).</p><a class="btn btn-primary btn-sm" href="#/image">Ouvrir l\'analyse</a></div>' +
+    '</div>';
+
+  h += '<div class="section-title">Les données du projet</div><div class="grid grid-4">' +
+    stat('Équipements', nbEq, nbSv + ' services hospitaliers') +
+    stat('Interventions réelles', nbIv, 'issues d\'observations de stage') +
+    stat('Checklists', nbCl, nbT + ' tâches de maintenance') +
+    stat('Paramètres surveillés', 10, 'scanner et IRM, seuils AAPM / ACR') + '</div>' +
+    '<div class="card" style="margin-top:16px;border-left:4px solid var(--rose-deep);">Les données de maintenance viennent d\'observations personnelles faites pendant un stage d\'observation. Les noms du personnel sont fictifs. Aucune donnée patient n\'est utilisée.</div>';
+
+  h += '<div class="section-title">Les idées</div><div class="grid grid-3">' +
+    idea('Un état des lieux vivant', 'Inventaire des équipements avec fiche technique, service, statut et historique d\'interventions, mis à jour dans le temps.') +
+    idea('Des checklists par équipement', 'Tâches de maintenance préventive ordonnées, avec des tâches de qualification : vérifier que les valeurs affichées par l\'appareil sont justes.') +
+    idea('Un monitoring continu', 'Transformer ces contrôles en données continues avec des seuils d\'alerte, une demande d\'intervention automatique et des actions à distance.') +
+    idea('Des capteurs sans toucher à l\'appareil', 'Une caméra extérieure qui lit un écran déjà présent, et un capteur clipsé sur un tuyau, pour ne pas risquer la garantie du fabricant.') +
+    idea('Une prédiction des pannes', 'Passer de « réparer quand ça casse » à « intervenir avant », avec un score de risque et un modèle entraîné sur de vraies pannes.') +
+    idea('Une analyse d\'image', 'Une première brique de traitement d\'image médicale : repérer la zone la plus contrastée. Ce n\'est pas un outil de diagnostic.') +
+    '</div>';
+
+  h += '<div class="section-title">Journal d\'avancement</div><div class="card"><ul class="timeline">' +
+    tl('8 novembre 2026', 'Mise en ligne d\'une copie statique du site complet (équipements, monitoring avec courbes, prédiction, analyse d\'image), sans connexion ni rôles.') +
+    tl('Fin octobre 2026', 'Analyse d\'image réelle (méthode d\'Otsu) à la place d\'une simulation. Monitoring étendu à l\'IRM avec des tolérances AAPM. Piste caméra et capteurs externes. Page des contraintes.') +
+    tl('Mi-octobre 2026', 'Monitoring continu du scanner : alertes, demandes d\'intervention automatiques, courbes, historique des alertes, première estimation du coût de capteurs réels.') +
+    tl('Début octobre 2026', 'Modèle de prédiction entraîné sur un jeu public de pannes (régression logistique et forêt aléatoire).') +
+    tl('Septembre 2026', 'Base du site : 52 équipements, checklists par équipement, historique de maintenance, accès par rôle (version locale PHP et MySQL).') +
+    '</ul></div>';
+  return wrap('Biomed', 'Suivi et maintenance prédictive du parc biomédical', h);
+}
+function stat(label, val, sub) {
+  return '<div class="card stat-card"><div class="label">' + esc(label) + '</div><div class="value">' + val + '</div><div class="sub">' + esc(sub) + '</div></div>';
+}
+function idea(t, p) { return '<div class="card"><h3 style="font-size:16px;">' + esc(t) + '</h3><p class="muted" style="margin-top:6px;">' + esc(p) + '</p></div>'; }
+function tl(d, t) { return '<li><b>' + esc(d) + '</b>' + esc(t) + '</li>'; }
+
+/* ====================== TABLEAU DE BORD ====================== */
+function pageDashboard() {
+  var total = D.equipements.length;
+  var panne = D.equipements.filter(function (e) { return statutDe(e) === 'en_panne'; }).length;
+  var maint = D.equipements.filter(function (e) { return statutDe(e) === 'en_maintenance'; }).length;
+  var diOuv = S.di.filter(function (d) { return d.statut !== 'cloturee'; }).length;
+  var alOuv = S.alerts.filter(function (a) { return a.statut === 'ouverte' || a.statut === 'acquittee'; }).length;
+  var h = '<div class="grid grid-4">' +
+    stat('Équipements suivis', total, 'tous services confondus') +
+    '<div class="card stat-card"><div class="label">En panne</div><div class="value" style="color:var(--red)">' + panne + '</div><div class="sub">nécessitent une intervention</div></div>' +
+    '<div class="card stat-card"><div class="label">En maintenance</div><div class="value" style="color:var(--amber)">' + maint + '</div><div class="sub">intervention en cours</div></div>' +
+    stat('Alertes en cours', alOuv, diOuv + ' demande(s) d\'intervention ouverte(s)') + '</div>';
+
+  var rec = D.interventions.slice(0, 6);
+  h += '<div class="section-title">Interventions récentes</div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Équipement</th><th>Service</th><th>Type</th><th>Technicien</th><th>Statut</th></tr></thead><tbody>';
+  rec.forEach(function (r) {
+    var eq = EQ[r.equipement_id];
+    h += '<tr><td class="mono">' + esc(r.date_intervention) + '</td><td><a href="#/equipement/' + eq.id + '">' + esc(eq.nom) + '</a></td><td><span class="badge badge-service">' + esc(nomsSvc(eq.service_id)) + '</span></td><td>' +
+      (r.type === 'preventive' ? 'Préventive' : 'Corrective') + '</td><td>' + esc(r.technicien || '-') + '</td><td><span class="badge ' + (r.statut === 'resolue' ? 'badge-service' : 'badge-maint') + '">' + esc(STATUT_LABEL[r.statut] || r.statut) + '</span></td></tr>';
+  });
+  h += '</tbody></table></div>';
+
+  var parSvc = D.services.map(function (s) { return { nom: s.nom, c: D.equipements.filter(function (e) { return e.service_id === s.id; }).length }; }).sort(function (a, b) { return b.c - a.c; });
+  var parInt = ['elevee', 'moyenne', 'faible'].map(function (k) { return { k: k, c: D.equipements.filter(function (e) { return e.intensite_utilisation === k; }).length }; });
+  var colInt = { elevee: 'var(--rose-deep)', moyenne: 'var(--amber)', faible: 'var(--ink-light)' };
+  function bars(rows, colFn) {
+    return rows.map(function (r) {
+      var pct = total ? Math.round(r.c / total * 100) : 0;
+      return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;"><div style="width:200px;font-size:13px;">' + esc(r.nom) + '</div>' +
+        '<div style="flex:1;background:var(--border);border-radius:4px;height:8px;overflow:hidden;"><div style="width:' + pct + '%;background:' + colFn(r) + ';height:100%;"></div></div>' +
+        '<div class="mono muted" style="width:30px;text-align:right;font-size:12px;">' + r.c + '</div></div>';
+    }).join('');
+  }
+  h += '<div class="grid grid-2"><div><div class="section-title" style="margin-top:22px;">Répartition des équipements par service</div><div class="card">' +
+    bars(parSvc, function () { return 'var(--rose-deep)'; }) + '</div></div>' +
+    '<div><div class="section-title" style="margin-top:22px;">Fréquence d\'utilisation (estimation)</div><div class="card">' +
+    bars(parInt.map(function (x) { return { nom: INT_LABEL[x.k], c: x.c, k: x.k }; }), function (r) { return colInt[r.k]; }) +
+    '<p class="muted" style="font-size:11.5px;margin-top:8px;">Classement qualitatif par rôle clinique, pas un compteur d\'heures.</p></div></div></div>';
+  return wrap('Tableau de bord', 'Vue d\'ensemble du parc biomédical', h);
+}
+
+/* ====================== ÉQUIPEMENTS ====================== */
+var F = { q: '', service: '', statut: '', intensite: '' };
+function filtrerEquip() {
+  var q = F.q.toLowerCase();
+  return D.equipements.filter(function (e) {
+    if (F.service && String(e.service_id) !== F.service) return false;
+    if (F.statut && statutDe(e) !== F.statut) return false;
+    if (F.intensite && e.intensite_utilisation !== F.intensite) return false;
+    if (q && ((e.nom || '') + ' ' + (e.fabricant || '') + ' ' + (e.modele || '')).toLowerCase().indexOf(q) < 0) return false;
+    return true;
+  }).sort(function (a, b) { return nomsSvc(a.service_id).localeCompare(nomsSvc(b.service_id)) || a.nom.localeCompare(b.nom); });
+}
+function equipRows() {
+  var list = filtrerEquip();
+  if (!list.length) return '<tr><td colspan="7" class="muted" style="text-align:center;padding:30px;">Aucun équipement ne correspond à ces critères.</td></tr>';
+  return list.map(function (e) {
+    var st = statutDe(e);
+    return '<tr><td><strong>' + esc(e.nom) + '</strong>' + (isMonitored(e.id) ? ' <span class="badge badge-rose">Monitoring</span>' : '') + '</td><td><span class="badge badge-service">' + esc(nomsSvc(e.service_id)) + '</span></td>' +
+      '<td>' + esc(((e.fabricant || '') + ' ' + (e.modele || '')).trim() || '-') + '</td><td class="mono">' + esc(e.numero_serie || '-') + '</td>' +
+      '<td><span class="badge ' + (STATUT_BADGE[st] || '') + '">' + esc(STATUT_LABEL[st] || st) + '</span></td>' +
+      '<td><span class="badge ' + INT_BADGE[e.intensite_utilisation] + '">' + INT_LABEL[e.intensite_utilisation] + '</span></td>' +
+      '<td><a class="btn btn-outline btn-sm" href="#/equipement/' + e.id + '">Fiche technique</a></td></tr>';
+  }).join('');
+}
+function pageEquipements() {
+  var opts = '<option value="">Tous les services</option>' + D.services.map(function (s) { return '<option value="' + s.id + '"' + (F.service === String(s.id) ? ' selected' : '') + '>' + esc(s.nom) + '</option>'; }).join('');
+  var h = '<div class="card" style="margin-bottom:20px;"><div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">' +
+    '<div class="field" style="flex:1;min-width:200px;margin-bottom:0;"><label>Recherche</label><input type="text" id="f-q" value="' + esc(F.q) + '" placeholder="Nom, fabricant, modèle"></div>' +
+    '<div class="field" style="width:220px;margin-bottom:0;"><label>Service</label><select id="f-service">' + opts + '</select></div>' +
+    '<div class="field" style="width:170px;margin-bottom:0;"><label>Statut</label><select id="f-statut"><option value="">Tous</option>' +
+    ['en_service', 'en_panne', 'en_maintenance', 'hors_service'].map(function (k) { return '<option value="' + k + '"' + (F.statut === k ? ' selected' : '') + '>' + STATUT_LABEL[k] + '</option>'; }).join('') + '</select></div>' +
+    '<div class="field" style="width:170px;margin-bottom:0;"><label>Usage</label><select id="f-int"><option value="">Tous</option>' +
+    ['elevee', 'moyenne', 'faible'].map(function (k) { return '<option value="' + k + '"' + (F.intensite === k ? ' selected' : '') + '>' + INT_LABEL[k] + '</option>'; }).join('') + '</select></div></div>' +
+    '<p class="muted" style="font-size:12px;margin-top:12px;">La colonne « Usage » est une estimation qualitative du rôle clinique de chaque équipement, pas un compteur d\'heures réel.</p></div>' +
+    '<div class="table-wrap"><table><thead><tr><th>Équipement</th><th>Service</th><th>Fabricant / modèle</th><th>N° série</th><th>Statut</th><th>Usage</th><th></th></tr></thead><tbody id="equip-body">' + equipRows() + '</tbody></table></div>';
+  return wrap('Équipements : état des lieux', D.equipements.length + ' équipements', h);
+}
+function initEquipements() {
+  function maj() {
+    F.q = document.getElementById('f-q').value; F.service = document.getElementById('f-service').value;
+    F.statut = document.getElementById('f-statut').value; F.intensite = document.getElementById('f-int').value;
+    document.getElementById('equip-body').innerHTML = equipRows();
+  }
+  ['f-q', 'f-service', 'f-statut', 'f-int'].forEach(function (id) { document.getElementById(id).addEventListener('input', maj); });
+}
+
+/* ====================== FICHE ÉQUIPEMENT ====================== */
+function pageEquipement(id, tab) {
+  var eq = EQ[id];
+  if (!eq) return wrap('Équipement introuvable', '', '<p>Cet équipement n\'existe pas.</p>');
+  tab = tab || 'fiche';
+  var st = statutDe(eq), sc = riskScore(eq), rk = riskLevel(sc);
+  var params = D.parametres.filter(function (p) { return p.equipement_id === id; });
+  var hist = D.interventions.filter(function (i) { return i.equipement_id === id; });
+  var h = '<div class="card" style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;"><div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">' +
+    '<span class="badge ' + (STATUT_BADGE[st] || '') + '">' + esc(STATUT_LABEL[st]) + '</span>' +
+    '<div><span class="muted" style="font-size:12px;">Score de risque (maintenance prédictive)</span><br><span class="' + rk.cls + '" style="font-size:18px;">' + sc + '/100, ' + rk.label + '</span></div>' +
+    '<div><span class="muted" style="font-size:12px;">N° série</span><br><span class="mono">' + esc(eq.numero_serie || '-') + '</span></div></div>' +
+    '<div style="display:flex;gap:8px;"><select id="statut-sel" style="width:170px;">' +
+    ['en_service', 'en_panne', 'en_maintenance', 'hors_service'].map(function (k) { return '<option value="' + k + '"' + (st === k ? ' selected' : '') + '>' + STATUT_LABEL[k] + '</option>'; }).join('') +
+    '</select><button class="btn btn-outline btn-sm" id="statut-btn" type="button">Mettre à jour le statut</button></div></div>';
+
+  var tabs = [['fiche', 'Fiche technique'], ['tables', 'Tables et capteurs'], ['historique', 'Historique (' + hist.length + ')'], ['checklist', 'Checklist / qualification']];
+  if (isMonitored(id)) tabs.push(['monitoring', 'Monitoring continu']);
+  h += '<div class="tabs">' + tabs.map(function (t) { return '<a href="#/equipement/' + id + '/' + t[0] + '" class="' + (tab === t[0] ? 'active' : '') + '">' + t[1] + '</a>'; }).join('') + '</div>';
+
+  if (tab === 'fiche') {
+    h += '<div class="grid grid-2"><div class="card"><div class="section-title" style="margin-top:0;">Identification</div><table>' +
+      row('Service', esc(nomsSvc(eq.service_id))) + row('Fabricant', esc(eq.fabricant || '-')) + row('Modèle', esc(eq.modele || '-')) +
+      row('N° de série', '<span class="mono">' + esc(eq.numero_serie || '-') + '</span>') + row('Date d\'installation', esc(eq.date_installation || 'non renseignée')) +
+      row('Fin de garantie', esc(eq.date_fin_garantie || 'non renseignée')) +
+      row('Fréquence d\'utilisation', '<span class="badge ' + INT_BADGE[eq.intensite_utilisation] + '">' + INT_LABEL[eq.intensite_utilisation] + '</span> <span class="muted" style="font-size:11.5px;">(estimation qualitative)</span>') +
+      '</table></div><div class="card"><div class="section-title" style="margin-top:0;">Description</div><p>' + esc(eq.description_courte || '-') + '</p></div></div>' +
+      '<div class="section-title">Principe de fonctionnement</div><div class="card"><p>' + esc(eq.fonctionnement_detail || 'Non renseigné.') + '</p></div>';
+  } else if (tab === 'tables') {
+    h += '<div class="table-wrap"><table><thead><tr><th>Paramètre</th><th>Unité</th><th>Valeur de référence</th><th>Dernière valeur mesurée</th><th>Conformité</th></tr></thead><tbody>' +
+      (params.length ? params.map(function (p) {
+        return '<tr><td>' + esc(p.parametre) + '</td><td class="mono">' + esc(p.unite || '-') + '</td><td class="mono">' + esc(p.valeur_reference || '-') + '</td><td class="mono">' + esc(p.derniere_valeur_mesuree || '-') + '</td><td>' +
+          (p.conforme ? '<span class="badge badge-service">Conforme</span>' : '<span class="badge badge-panne">Non conforme</span>') + '</td></tr>';
+      }).join('') : '<tr><td colspan="5" class="muted" style="text-align:center;padding:24px;">Aucun paramètre ou capteur renseigné pour cet équipement.</td></tr>') + '</tbody></table></div>';
+  } else if (tab === 'historique') {
+    h += '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Type</th><th>Problème / objet</th><th>Diagnostic</th><th>Action</th><th>Technicien</th><th>Statut</th></tr></thead><tbody>' +
+      (hist.length ? hist.map(function (x) {
+        return '<tr><td class="mono">' + esc(x.date_intervention) + '</td><td>' + (x.type === 'preventive' ? 'Préventive' : 'Corrective') + '</td><td style="max-width:220px;">' + esc(x.description_probleme) + '</td><td class="muted" style="max-width:220px;">' + esc(x.diagnostic || '-') + '</td><td style="max-width:220px;">' + esc(x.action_corrective || '-') + '</td><td>' + esc(x.technicien || '-') + '</td><td><span class="badge ' + (x.statut === 'resolue' ? 'badge-service' : 'badge-maint') + '">' + esc(STATUT_LABEL[x.statut] || x.statut) + '</span></td></tr>';
+      }).join('') : '<tr><td colspan="7" class="muted" style="text-align:center;padding:24px;">Aucune intervention enregistrée pour cet équipement.</td></tr>') + '</tbody></table></div>';
+  } else if (tab === 'checklist') {
+    var cl = checklistDe(id);
+    if (cl) {
+      h += '<div class="card" style="margin-bottom:14px;"><strong>' + esc(cl.nom) + '</strong><div class="muted" style="font-size:12px;margin-top:4px;">Référence : ' + esc(cl.source_reference || '') + '</div></div><div class="table-wrap">' +
+        tachesDe(cl.id).map(function (t, i) {
+          return '<div class="checklist-item"><input type="checkbox" id="t' + i + '"><label for="t' + i + '" style="font-weight:400;margin:0;">' + esc(t.tache) + (t.est_qualification ? '<span class="tag-qualif">Qualification</span>' : '') + '</label></div>';
+        }).join('') + '</div><p class="muted" style="font-size:12px;margin-top:10px;">Les tâches marquées <strong>Qualification</strong> vérifient que les valeurs affichées ou mesurées par l\'équipement sont réellement correctes (étalonnage, contrôle de conformité), pas seulement qu\'il fonctionne.</p>';
+    } else h += '<p class="muted">Aucune checklist associée.</p>';
+  } else if (tab === 'monitoring' && isMonitored(id)) {
+    h += '<div id="mon-root">' + monitoringFragment(String(id)) + '</div>';
+  }
+  return wrap(eq.nom, nomsSvc(eq.service_id), h);
+}
+function row(a, b) { return '<tr><td class="muted">' + a + '</td><td>' + b + '</td></tr>'; }
+function initEquipement(id, tab) {
+  var btn = document.getElementById('statut-btn');
+  if (btn) btn.addEventListener('click', function () { S.statut[id] = document.getElementById('statut-sel').value; saveState(); route(); });
+  if (tab === 'monitoring') startMonTimer(String(id));
+}
+
+/* ====================== MONITORING ====================== */
+function monitoringFragment(eq) {
+  var defs = MON_DEFS[eq], nom = EQ[eq].nom;
+  var nbTot = Object.keys(defs).length, nbReel = 0, estim = [];
+  Object.keys(defs).forEach(function (p) { if (defs[p].source_type === 'reel') nbReel++; else estim.push(defs[p].label); });
+  var actif = S.active[eq];
+  var h = '<div class="card" style="border-left:4px solid var(--rose-deep);margin-bottom:16px;"><strong>Module de monitoring continu, simulation.</strong> Aucun capteur n\'est connecté à un vrai ' + esc(nom) + ' : les VALEURS ci-dessous sont générées automatiquement dans votre navigateur par un moteur de simulation (marche aléatoire, dérive occasionnelle). En revanche, ' + nbReel + ' des ' + nbTot + ' <strong>seuils</strong> d\'alerte et critique sont des tolérances réellement publiées (voir la source sous chaque paramètre).' +
+    (estim.length ? ' Seul' + (estim.length > 1 ? 's' : '') + ' ' + esc(estim.join(' et ')) + ' reste' + (estim.length > 1 ? 'nt' : '') + ' une estimation d\'ingénierie, faute de norme publique trouvée.' : '') +
+    ' La logique d\'alerte, de demande d\'intervention automatique et d\'actions à distance est celle d\'un vrai système de télésurveillance biomédicale.</div>';
+  h += '<div class="card" style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;"><div><span class="muted" style="font-size:12px;">État du monitoring</span><br><span class="badge ' + (actif ? 'badge-service' : 'badge-hs') + '">' + (actif ? 'Actif' : 'En pause') + '</span> <span class="muted" style="font-size:12px;margin-left:10px;">nouvelle lecture toutes les 8 secondes</span></div>' +
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-outline btn-sm" type="button" onclick="monTickNow(\'' + eq + '\')">Générer une lecture maintenant</button>' +
+    '<button class="btn btn-outline btn-sm" type="button" onclick="monDerive(\'' + eq + '\')">Provoquer une dérive (démo)</button>' +
+    '<button class="btn btn-outline btn-sm" type="button" onclick="monPause(\'' + eq + '\')">' + (actif ? 'Mettre en pause' : 'Reprendre') + '</button>' +
+    '<button class="btn btn-outline btn-sm" type="button" onclick="monDiag(\'' + eq + '\')">Diagnostic à distance (simulation)</button></div></div><div id="mon-diagnostic-result"></div>';
+
+  h += '<div class="section-title" style="margin-top:0;">Lectures en direct</div><div class="grid grid-2">';
+  Object.keys(defs).forEach(function (p) {
+    var def = defs[p], arr = (S.readings[eq] || {})[p] || [], l = arr[arr.length - 1];
+    h += '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;"><div><strong>' + esc(def.label) + '</strong>' + (def.qualification ? '<span class="tag-qualif">Qualification</span>' : '') + '</div>' +
+      (l ? '<span class="badge ' + NIV_CLASS[l.n] + '">' + NIV_LABEL[l.n] + '</span>' : '') + '</div>';
+    if (l) {
+      var ref = def.sens === 'absolu' ? Math.abs(l.v) : l.v;
+      var pct = Math.min(100, Math.round(ref / (def.seuil_critique || 1) * 100));
+      h += '<div class="mono" style="font-size:20px;margin:8px 0 4px;">' + l.v + ' <span class="muted" style="font-size:13px;">' + esc(def.unite) + '</span></div>' +
+        '<div class="risk-bar" style="width:100%;"><span style="width:' + pct + '%;background:' + (l.n === 'critique' ? 'var(--red)' : (l.n === 'alerte' ? 'var(--amber)' : 'var(--sage)')) + ';"></span></div>' +
+        '<div class="muted" style="font-size:11.5px;margin-top:6px;">Seuils : alerte ≥ ' + def.seuil_alerte + ' ' + esc(def.unite) + ', critique ≥ ' + def.seuil_critique + ' ' + esc(def.unite) + ' &middot; màj ' + esc(l.t) + '</div>' +
+        '<div style="margin-top:12px;">' + courbeSvg(arr.slice(-30), def) + '<div class="muted" style="font-size:10.5px;margin-top:4px;">Dernières lectures &middot; pointillés = seuils d\'alerte et critique</div></div>';
+    }
+    h += '<div class="muted" style="font-size:11px;margin-top:10px;">Tâche de checklist liée : ' + esc(def.tache_liee) + '</div>' +
+      '<div class="muted" style="font-size:11px;margin-top:4px;">Seuil, source : ' + esc(def.source) + '</div>' +
+      '<div class="muted" style="font-size:11px;margin-top:4px;">Capteur réel nécessaire : ' + esc(def.capteur_reel) + '</div></div>';
+  });
+  h += '</div><p class="muted" style="font-size:11.5px;margin-top:4px;">Chaque fiche indique le capteur physique qu\'il faudrait réellement installer pour mesurer cette valeur. Voir aussi le chiffrage : <a href="#/cout">estimation des coûts</a>.</p>';
+
+  var al = S.alerts.filter(function (a) { return a.eq == eq && (a.statut === 'ouverte' || a.statut === 'acquittee'); }).sort(function (a, b) { return a.t < b.t ? 1 : -1; });
+  h += '<div class="section-title" style="display:flex;justify-content:space-between;align-items:baseline;"><span>Alertes en cours</span><a href="#/alertes" style="font-size:12px;font-weight:600;text-transform:none;letter-spacing:0;">Historique complet (style journal) →</a></div>';
+  if (al.length) {
+    h += '<div class="table-wrap" style="margin-bottom:16px;"><table><thead><tr><th>Date</th><th>Niveau</th><th>Message</th><th>Statut</th><th>Demande d\'intervention</th><th></th></tr></thead><tbody>' +
+      al.map(function (a) {
+        return '<tr><td class="mono" style="font-size:12px;">' + esc(a.t) + '</td><td><span class="badge ' + NIV_CLASS[a.niveau] + '">' + NIV_LABEL[a.niveau] + '</span></td><td style="max-width:320px;">' + esc(a.message) + '</td>' +
+          '<td>' + (a.statut === 'ouverte' ? '<span class="badge badge-panne">Ouverte</span>' : '<span class="badge badge-maint">Acquittée</span>') + '</td>' +
+          '<td>' + (a.di ? '<a href="#/demandes">DI #' + a.di + '</a>' : '-') + '</td><td>' + (a.statut === 'ouverte' ? '<button class="btn btn-outline btn-sm" type="button" onclick="monAck(' + a.id + ',\'' + eq + '\')">Acquitter</button>' : '') + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  } else h += '<p class="muted" style="margin-bottom:16px;">Aucune alerte en cours.</p>';
+
+  var ac = S.actions.filter(function (a) { return a.eq == eq; }).slice(0, 6);
+  h += '<div class="section-title">Journal des actions à distance</div>';
+  if (ac.length) {
+    h += '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Action</th><th>Détail</th></tr></thead><tbody>' +
+      ac.map(function (a) { return '<tr><td class="mono" style="font-size:12px;">' + esc(a.t) + '</td><td>' + esc(a.type) + '</td><td style="max-width:420px;white-space:pre-line;font-size:12.5px;">' + esc(a.detail) + '</td></tr>'; }).join('') + '</tbody></table></div>';
+  } else h += '<p class="muted">Aucune action à distance enregistrée pour l\'instant.</p>';
+  h += '<p style="margin-top:18px;"><button class="btn btn-outline btn-sm" type="button" onclick="resetDemo()">Réinitialiser la démonstration</button> <span class="muted" style="font-size:11.5px;">Les lectures, alertes et demandes sont gardées dans ce navigateur.</span></p>';
+  return h;
+}
+function monRefresh(eq) { var r = document.getElementById('mon-root'); if (r) r.innerHTML = monitoringFragment(eq); }
+function monTickNow(eq) { tickEquipment(eq); saveState(); monRefresh(eq); }
+function monDerive(eq) { monForcerDerive(eq); monTickNow(eq); }
+function monPause(eq) { monPauseReprise(eq, !S.active[eq]); monRefresh(eq); }
+function monAck(id, eq) { monAcquitter(id); monRefresh(eq); }
+function monDiag(eq) {
+  var texte = monDiagnostic(eq); monRefresh(eq);
+  var t = document.getElementById('mon-diagnostic-result');
+  if (t) t.innerHTML = '<div class="card" style="margin-bottom:16px;border-left:4px solid var(--rose-deep);white-space:pre-line;font-size:13px;">' + esc(texte) + '</div>';
+}
+function resetDemo() { if (confirm('Réinitialiser les lectures, alertes et demandes de la démonstration ?')) { resetState(); route(); } }
+
+var MON_TIMER = null;
+function stopMonTimer() { if (MON_TIMER) { clearInterval(MON_TIMER); MON_TIMER = null; } }
+function startMonTimer(eq) {
+  stopMonTimer();
+  MON_TIMER = setInterval(function () { if (document.hidden) return; MON_IDS.forEach(function (i) { tickEquipment(i); }); saveState(); monRefresh(eq); }, 8000);
+}
+function pageMonitoring(eq) {
+  eq = eq || '2';
+  var tabs = MON_IDS.slice().reverse().map(function (i) { return '<a href="#/monitoring/' + i + '" class="' + (i === eq ? 'active' : '') + '">' + esc(EQ[i].nom) + '</a>'; }).join('');
+  return wrap('Monitoring continu', 'Suivi simulé des paramètres de qualité, avec courbes', '<div class="tabs">' + tabs + '</div><div id="mon-root">' + monitoringFragment(eq) + '</div>');
+}
+
+/* ====================== JOURNAL DES ALERTES ====================== */
+var LF = { eq: '', niv: '', jours: '30' };
+function pageAlertes() {
+  var h = '<div class="card" style="margin-bottom:18px;"><div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">' +
+    '<div class="field" style="width:230px;margin-bottom:0;"><label>Équipement</label><select id="l-eq"><option value="">Tous</option>' + MON_IDS.map(function (i) { return '<option value="' + i + '"' + (LF.eq === i ? ' selected' : '') + '>' + esc(EQ[i].nom) + '</option>'; }).join('') + '</select></div>' +
+    '<div class="field" style="width:160px;margin-bottom:0;"><label>Niveau</label><select id="l-niv"><option value="">Tous</option><option value="alerte"' + (LF.niv === 'alerte' ? ' selected' : '') + '>Alerte</option><option value="critique"' + (LF.niv === 'critique' ? ' selected' : '') + '>Critique</option></select></div>' +
+    '<div class="field" style="width:160px;margin-bottom:0;"><label>Période</label><select id="l-j"><option value="7">7 jours</option><option value="30">30 jours</option><option value="90">90 jours</option><option value="0">Tout</option></select></div></div></div>' +
+    '<div id="log-box"></div>';
+  return wrap('Historique des alertes', 'Journal complet, style fichier de log', h);
+}
+function logRows() {
+  var lim = LF.jours === '0' ? 0 : Date.now() - parseInt(LF.jours, 10) * 86400000;
+  var rows = S.alerts.filter(function (a) {
+    if (LF.eq && String(a.eq) !== LF.eq) return false;
+    if (LF.niv && a.niveau !== LF.niv) return false;
+    if (lim && new Date(a.t.replace(' ', 'T')).getTime() < lim) return false;
+    return true;
+  }).sort(function (a, b) { return a.t < b.t ? 1 : -1; });
+  var col = { alerte: '#e8b15a', critique: '#ff7a8a' };
+  var h = '<div class="log">';
+  if (!rows.length) h += '<div style="color:#bfa6b6;">Aucune entrée pour ces filtres.</div>';
+  rows.forEach(function (a) {
+    var statut = a.statut === 'resolue' ? 'RÉSOLUE' : (a.statut === 'acquittee' ? 'ACQUITTÉE' : 'OUVERTE');
+    h += '<div><span style="color:#9a8290;">[' + esc(a.t) + ']</span> <span style="color:' + col[a.niveau] + ';font-weight:700;">[' + a.niveau.toUpperCase() + ']</span> ' + esc(EQ[a.eq].nom) + ': ' + esc(a.message) + ' <span style="color:#9a8290;">[' + statut + (a.di ? ' DI#' + a.di : '') + ']</span></div>';
+  });
+  return h + '</div><p class="muted" style="font-size:12px;margin-top:8px;">' + rows.length + ' entrée(s). Les dates sont celles de la simulation dans ce navigateur.</p>';
+}
+function initAlertes() {
+  document.getElementById('l-j').value = LF.jours;
+  function maj() { LF.eq = document.getElementById('l-eq').value; LF.niv = document.getElementById('l-niv').value; LF.jours = document.getElementById('l-j').value; document.getElementById('log-box').innerHTML = logRows(); }
+  ['l-eq', 'l-niv', 'l-j'].forEach(function (id) { document.getElementById(id).addEventListener('input', maj); });
+  maj();
+}
+
+/* ====================== HISTORIQUE, CHECKLISTS, DEMANDES ====================== */
+function pageInterventions() {
+  var h = '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Équipement</th><th>Type</th><th>Problème / objet</th><th>Action</th><th>Technicien</th><th>Statut</th></tr></thead><tbody>' +
+    D.interventions.map(function (x) {
+      var eq = EQ[x.equipement_id];
+      return '<tr><td class="mono">' + esc(x.date_intervention) + '</td><td><a href="#/equipement/' + eq.id + '/historique">' + esc(eq.nom) + '</a></td><td>' + (x.type === 'preventive' ? 'Préventive' : 'Corrective') + '</td><td style="max-width:240px;">' + esc(x.description_probleme) + '</td><td style="max-width:240px;">' + esc(x.action_corrective || '-') + '</td><td>' + esc(x.technicien || '-') + '</td><td><span class="badge ' + (x.statut === 'resolue' ? 'badge-service' : 'badge-maint') + '">' + esc(STATUT_LABEL[x.statut] || x.statut) + '</span></td></tr>';
+    }).join('') + '</tbody></table></div>';
+  return wrap('Historique de maintenance', D.interventions.length + ' interventions réelles (noms du personnel fictifs)', h);
+}
+function pageChecklists() {
+  var h = '<div class="card" style="border-left:4px solid var(--rose-deep);margin-bottom:20px;">Chaque équipement a sa propre checklist de maintenance préventive. Les tâches marquées <span class="tag-qualif">Qualification</span> vérifient que les valeurs affichées ou mesurées par l\'équipement sont réellement correctes (étalonnage, contrôle de conformité), pas seulement qu\'il fonctionne.</div>';
+  var parSvc = {};
+  D.equipements.forEach(function (e) { (parSvc[nomsSvc(e.service_id)] = parSvc[nomsSvc(e.service_id)] || []).push(e); });
+  Object.keys(parSvc).sort().forEach(function (sv) {
+    h += '<div class="section-title">' + esc(sv) + '</div><div class="table-wrap" style="margin-bottom:22px;"><table><thead><tr><th>Équipement</th><th>Tâches</th><th>Dont qualification</th><th>Référence</th><th></th></tr></thead><tbody>';
+    parSvc[sv].sort(function (a, b) { return a.nom.localeCompare(b.nom); }).forEach(function (e) {
+      var cl = D.checklists.filter(function (c) { return c.equipement_id === e.id; })[0];
+      var ts = cl ? tachesDe(cl.id) : [];
+      h += '<tr><td><strong>' + esc(e.nom) + '</strong>' + (isMonitored(e.id) ? ' <span class="badge badge-rose">Monitoring continu</span>' : '') + '</td><td class="mono">' + (ts.length || '-') + '</td><td class="mono">' + ts.filter(function (t) { return t.est_qualification; }).length + '</td><td class="muted" style="font-size:12px;max-width:280px;">' + esc(cl ? cl.source_reference : 'Checklist générique par défaut') + '</td><td><a class="btn btn-outline btn-sm" href="#/equipement/' + e.id + '/' + (isMonitored(e.id) ? 'monitoring' : 'checklist') + '">Ouvrir</a></td></tr>';
+    });
+    h += '</tbody></table></div>';
+  });
+  return wrap('Checklists de maintenance préventive', 'Une checklist propre à chaque équipement', h);
+}
+function pageDemandes() {
+  var di = S.di.slice().sort(function (a, b) { return b.id - a.id; });
+  var h = '<div class="table-wrap" style="margin-bottom:24px;"><table><thead><tr><th>N°</th><th>Date</th><th>Équipement</th><th>Origine</th><th>Urgence</th><th>Description</th><th>Statut</th><th></th></tr></thead><tbody>' +
+    (di.length ? di.map(function (d) {
+      return '<tr><td class="mono">#' + d.id + '</td><td class="mono">' + esc(d.date) + '</td><td>' + esc(EQ[d.eq].nom) + '</td><td>' + (d.auto ? '<span class="badge badge-rose">Monitoring</span>' : 'Manuelle') + '</td><td><span class="badge ' + (d.urgence === 'urgente' ? 'badge-panne' : 'badge-rose') + '">' + (d.urgence === 'urgente' ? 'Urgente' : 'Normale') + '</span></td><td style="max-width:360px;font-size:12.5px;">' + esc(d.description) + '</td><td><span class="badge ' + (d.statut === 'cloturee' ? 'badge-service' : 'badge-maint') + '">' + (d.statut === 'cloturee' ? 'Clôturée' : 'Ouverte') + '</span></td><td>' + (d.statut !== 'cloturee' ? '<button class="btn btn-outline btn-sm" type="button" onclick="cloturer(' + d.id + ')">Clôturer</button>' : '') + '</td></tr>';
+    }).join('') : '<tr><td colspan="8" class="muted" style="text-align:center;padding:24px;">Aucune demande pour l\'instant.</td></tr>') + '</tbody></table></div>' +
+    '<div class="card" style="border-left:4px solid var(--rose-deep);margin-bottom:20px;"><strong>Boucle de réparation.</strong> Quand une demande créée automatiquement par le monitoring est clôturée ici, le paramètre concerné revient à sa valeur normale à la lecture suivante et l\'alerte passe à « résolue ». C\'est ce qui relie une action humaine à la simulation.</div>' +
+    '<div class="section-title">Nouvelle demande d\'intervention</div><div class="card"><div class="grid grid-3"><div class="field"><label>Équipement</label><select id="di-eq">' +
+    D.equipements.slice().sort(function (a, b) { return a.nom.localeCompare(b.nom); }).map(function (e) { return '<option value="' + e.id + '">' + esc(e.nom) + '</option>'; }).join('') +
+    '</select></div><div class="field"><label>Urgence</label><select id="di-urg"><option value="normale">Normale</option><option value="urgente">Urgente</option></select></div></div>' +
+    '<div class="field"><label>Description du problème</label><textarea id="di-desc" rows="2"></textarea></div><button class="btn btn-primary" type="button" id="di-btn">Envoyer la demande</button></div>';
+  return wrap('Demandes d\'intervention', 'Création, suivi et clôture', h);
+}
+function cloturer(id) { cloturerDI(id); route(); }
+function initDemandes() {
+  document.getElementById('di-btn').addEventListener('click', function () {
+    var desc = document.getElementById('di-desc').value.trim();
+    if (!desc) { document.getElementById('di-desc').focus(); return; }
+    S.di.push({ id: nextId(), eq: document.getElementById('di-eq').value, date: fmtDay(new Date()), description: desc, urgence: document.getElementById('di-urg').value, statut: 'ouverte', auto: false });
+    saveState(); route();
+  });
+}
+
+/* ====================== PRÉDICTION ====================== */
+function pagePrediction() {
+  var scored = D.equipements.map(function (e) { var sc = riskScore(e); return { e: e, sc: sc, rk: riskLevel(sc) }; }).sort(function (a, b) { return b.sc - a.sc; });
+  var h = '<div class="card" style="border-left:4px solid var(--rose-deep);margin-bottom:20px;"><strong>Deux volets.</strong> (1) Un score de risque par équipement, calculé par une formule transparente à partir de l\'historique et du monitoring. (2) Un modèle entraîné sur de vraies pannes industrielles, utilisable en direct plus bas. Le premier n\'est pas un modèle appris, le second n\'est pas entraîné sur des équipements biomédicaux : les deux limites sont indiquées.</div>';
+  h += '<div class="section-title" style="margin-top:0;">1. Score de risque par équipement (formule transparente)</div>' +
+    '<div class="card" style="margin-bottom:16px;font-size:13.5px;">Fréquence des pannes correctives (jusqu\'à 40 points), temps écoulé depuis la dernière intervention (jusqu\'à 30 points), statut actuel (jusqu\'à 30 points), et pour le scanner et l\'IRM un terme supplémentaire (jusqu\'à 25 points) qui reflète l\'état le plus défavorable des lectures en direct. Ouvrez le monitoring et provoquez une dérive : le score de ces équipements change.</div>' +
+    '<div class="table-wrap"><table><thead><tr><th>Équipement</th><th>Service</th><th>Statut</th><th>Score de risque</th><th></th></tr></thead><tbody>' +
+    scored.slice(0, 20).map(function (s) {
+      return '<tr><td><strong>' + esc(s.e.nom) + '</strong></td><td><span class="badge badge-service">' + esc(nomsSvc(s.e.service_id)) + '</span></td><td>' + esc(STATUT_LABEL[statutDe(s.e)]) + '</td><td><div style="display:flex;align-items:center;gap:10px;"><div class="risk-bar"><span style="width:' + s.sc + '%;"></span></div><span class="' + s.rk.cls + '">' + s.sc + ', ' + s.rk.label + '</span></div></td><td><a class="btn btn-outline btn-sm" href="#/equipement/' + s.e.id + '">Voir la fiche</a></td></tr>';
+    }).join('') + '</tbody></table></div><p class="muted" style="font-size:12px;margin-top:8px;">20 équipements les plus à risque affichés sur ' + scored.length + '.</p>';
+
+  h += '<div class="section-title">2. Modèle de prédiction de pannes (régression logistique)</div>' +
+    '<div class="card" style="border-left:4px solid var(--amber);margin-bottom:16px;">Il n\'existe pas de jeu de données public de pannes d\'équipements biomédicaux. Le modèle est entraîné sur un jeu public de référence en maintenance industrielle (AI4I 2020, 10 000 relevés d\'une fraiseuse, licence CC BY 4.0). Il prouve que la chaîne complète (entraînement, évaluation, utilisation) fonctionne sur de vraies pannes. Il ne prédit pas les pannes d\'un scanner ou d\'une IRM.</div>' +
+    '<div class="grid grid-2"><div class="card"><h3>Relevé de la machine</h3><div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;"><button class="btn btn-outline btn-sm" type="button" id="p-normal">Régime normal</button><button class="btn btn-outline btn-sm" type="button" id="p-charge">Machine surchargée</button></div>' +
+    '<div class="field"><label>Température de l\'air (K)</label><input type="number" id="p-air" step="0.1" value="300"></div>' +
+    '<div class="field"><label>Température du process (K)</label><input type="number" id="p-proc" step="0.1" value="310"></div>' +
+    '<div class="field"><label>Vitesse de rotation (tr/min)</label><input type="number" id="p-rpm" step="10" value="1500"></div>' +
+    '<div class="field"><label>Couple (Nm)</label><input type="number" id="p-torque" step="0.5" value="40"></div>' +
+    '<div class="field"><label>Usure de l\'outil (min)</label><input type="number" id="p-wear" step="5" value="50"></div>' +
+    '<div class="field"><label>Type de produit (qualité)</label><select id="p-type"><option value="L">L (basse)</option><option value="M" selected>M (moyenne)</option><option value="H">H (haute)</option></select></div></div>' +
+    '<div class="card"><h3>Score de risque</h3><div class="display" style="font-size:34px;color:var(--rose-deep);" id="p-score">0 %</div>' +
+    '<div style="height:16px;background:var(--rose-pale);border-radius:99px;overflow:hidden;margin:8px 0;"><span id="p-gauge" style="display:block;height:100%;width:0;background:var(--sage);transition:width .25s;"></span></div>' +
+    '<p id="p-level" style="font-weight:600;margin-bottom:10px;"></p><h3 style="margin-top:12px;font-size:15px;">Ce qui pèse dans le score</h3><div id="p-contrib"></div>' +
+    '<p class="muted" style="font-size:12px;margin-top:10px;">Barre vers la droite : augmente le risque. Vers la gauche : le diminue.</p></div></div>' +
+    '<div class="card" style="margin-top:16px;"><h3>Performance mesurée sur 2 000 relevés jamais vus à l\'entraînement</h3><div class="table-wrap" style="box-shadow:none;margin-top:8px;"><table><thead><tr><th></th><th>Régression logistique (utilisée ici)</th><th>Forêt aléatoire (non exportée)</th></tr></thead><tbody>' +
+    '<tr><td>ROC-AUC</td><td>90,8 %</td><td>96,9 %</td></tr><tr><td>Rappel (pannes détectées)</td><td>82,4 %</td><td>79,4 %</td></tr><tr><td>Précision</td><td>14,5 %</td><td>40,0 %</td></tr></tbody></table></div>' +
+    '<p style="font-size:13.5px;margin-top:10px;">Au seuil de 50 %, la régression logistique détecte 56 des 68 pannes du jeu de test, au prix de 330 fausses alertes. Les pannes ne représentent que 3,4 % des données et l\'entraînement a rééquilibré les classes pour ne pas rater de pannes. Je pense donc que le score affiché est plus élevé que la vraie fréquence de panne : il faut le lire comme un niveau de risque relatif, pas comme une probabilité exacte.</p></div>';
+  return wrap('Prédiction', 'Score de risque et modèle entraîné sur de vraies pannes', h);
+}
+
+/* ====================== ANALYSE D'IMAGE ====================== */
+function pageImage() {
+  var h = '<div class="card" style="border-left:4px solid var(--amber);margin-bottom:20px;"><strong>Ce que fait réellement ce module.</strong> L\'image est convertie en niveaux de gris, un seuil de séparation optimal est calculé par la méthode d\'Otsu (1979) à partir de l\'histogramme réel de l\'image, puis la plus grande région connexe qui se détache du fond est repérée. C\'est un algorithme classique, déterministe et vérifiable, pas un modèle entraîné et pas un système de diagnostic. Il repère « la zone la plus contrastée par rapport au fond », qui peut être une lésion, un artefact ou un reflet. L\'image reste dans votre navigateur. Pour tester avec de vraies images médicales anonymisées : <a href="https://www.cancerimagingarchive.net" target="_blank" rel="noopener">The Cancer Imaging Archive</a>.</div>' +
+    '<div class="grid grid-2"><div class="card"><div class="section-title" style="margin-top:0;">Charger une image</div><div class="field"><input type="file" id="img-file" accept="image/png,image/jpeg"></div>' +
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;"><button class="btn btn-outline btn-sm" type="button" id="ex1">Exemple : zone nette</button><button class="btn btn-outline btn-sm" type="button" id="ex2">Exemple : image uniforme</button></div>' +
+    '<canvas id="img-canvas" width="400" height="300" style="max-width:100%;border-radius:8px;border:1px solid var(--border);background:#000;"></canvas></div>' +
+    '<div class="card"><div class="section-title" style="margin-top:0;">Résultat</div><div id="img-result" class="muted">Choisissez une image pour lancer le calcul.</div></div></div>' +
+    '<div class="section-title">Pour aller plus loin</div><div class="card"><p>Limite connue : un dégradé d\'éclairage lent et fort sur toute l\'image peut fausser la détection, car le seuil est global. Une vraie version clinique s\'appuierait sur un modèle de segmentation entraîné sur un jeu d\'images médicales anonymisées, validé par un radiologue avant tout usage clinique, dans le respect de la loi 09-08 sur les données personnelles.</p></div>';
+  return wrap('Analyse d\'image', 'Seuillage d\'Otsu et composantes connexes, pas un diagnostic', h);
+}
+
+/* ====================== COÛT, SUITE, CONTRAINTES ====================== */
+function pageCout() { return wrap('Coût d\'un projet de capteurs réels', 'Monitoring continu : du prototype simulé à un vrai déploiement', COUT_HTML); }
+
+function pageSuite() {
+  var h = '<p class="muted" style="margin-bottom:18px;max-width:760px;">Les prochaines étapes, par ordre de priorité.</p><div class="grid grid-2">' +
+    card('Réentraîner sur de vraies données biomédicales', 'Garder la même chaîne d\'entraînement, mais l\'alimenter avec l\'historique de pannes d\'un vrai parc d\'équipements dès qu\'il existe.') +
+    card('Remplacer les valeurs simulées par de vraies lectures', 'La logique d\'alerte, de demande d\'intervention et de score de risque n\'aurait pas besoin de changer. Seule la source des valeurs change.') +
+    card('Tester la lecture d\'écran par caméra', 'Sur l\'IRM, un instrument de niveau d\'hélium (AMI Model 1700) possède déjà un écran externe, monté hors du cryostat. Une caméra et une reconnaissance de chiffres pourraient lire ce niveau sans modifier l\'aimant. Pour le scanner, aucun écran équivalent confirmé. Précédent industriel : <a href="https://sensfix.com/en/platform/service-ocr-pro" target="_blank" rel="noopener">ServiceOCR Pro (Sensfix)</a>, non vérifié pour l\'imagerie médicale.') +
+    card('Détecter un niveau de liquide depuis l\'extérieur d\'un tuyau', 'Des capteurs clipsés existent : <a href="https://au.omega.com/pptst/LVUN-600.html" target="_blank" rel="noopener">Omega LVUN-600</a> et <a href="https://industry.panasonic.com/ap/en/products/fasys/sensor/photoelectric/number/ex-f1" target="_blank" rel="noopener">Panasonic EX-F1</a>. Ils utilisent un signal optique ou ultrasonore, pas la vibration : les capteurs vibrants (fourche vibrante) doivent toucher le liquide.') +
+    card('Étendre le monitoring à d\'autres équipements', 'L\'architecture est générique : le scanner et l\'IRM sont couverts avec le même code. Il suffit d\'ajouter les paramètres d\'un nouvel équipement (mammographe, module CT de la gamma-caméra).') +
+    card('Améliorer l\'analyse d\'image', 'Corriger la sensibilité aux dégradés d\'éclairage, puis tester un modèle de segmentation entraîné sur des images médicales publiques et anonymisées.') +
+    card('Retrouver une vraie base de données', 'Cette copie statique garde son état dans le navigateur. La version locale PHP et MySQL a une vraie base. Un hébergement avec base de données permettrait de partager l\'état entre visiteurs.') + '</div>';
+  return wrap('Suite du projet', 'Ce que je veux faire ensuite', h);
+}
+function card(t, p) { return '<div class="card"><h3 style="font-size:16px;margin-bottom:6px;">' + esc(t) + '</h3><p>' + p + '</p></div>'; }
+
+function pageContraintes() {
+  var items = [
+    ['1. État des lieux et fiches équipements', '52 appareils, 9 services. Les données techniques viennent d\'un rapport de stage d\'observation, donc de ce qui a été observé ou communiqué pendant cette période, pas d\'un inventaire mis à jour en continu. Les noms du personnel sont fictifs. Aucune photo réelle des équipements n\'est intégrée.'],
+    ['2. Checklists et qualification', '52 checklists (une par équipement, plus une générique), 269 tâches. Construites à partir des pratiques de maintenance préventive décrites dans le rapport et des principes généraux de maintenance, pas validées une à une par un responsable qualité biomédical. Certaines tâches s\'appuient sur une panne ou une observation réelle du stage (indiqué dans la source), d\'autres sont des tâches standard pour ce type d\'équipement.'],
+    ['3. Historique de maintenance', '16 interventions réellement décrites dans le rapport. C\'est un échantillon limité à la période et aux cas couverts par le stage, pas un historique complet.'],
+    ['4. Accès par rôle', 'La version locale reproduit la hiérarchie d\'un vrai logiciel de GMAO (demandeur, technicien, responsable) en version simplifiée. Cette copie en ligne n\'a ni connexion ni rôles : tout est accessible à tous.'],
+    ['5. Analyse d\'image (seuillage d\'Otsu)', 'Algorithme de traitement d\'image classique, réel sur les pixels envoyés, mais pas un outil de diagnostic : pas de modèle entraîné, pas de validation clinique, pas de donnée patient. Il repère la zone la plus contrastée, pas une structure anatomique, et reste sensible aux forts dégradés d\'éclairage.'],
+    ['6. Prédiction', 'Le score de risque par équipement est une formule écrite à la main, pas un modèle appris, et ses poids ne sont pas validés par un statisticien. Le modèle entraîné (régression logistique) utilise des données industrielles publiques, pas biomédicales, et son score est à lire comme un niveau relatif.'],
+    ['7. Monitoring continu (scanner et IRM)', 'Les valeurs sont générées par un moteur de simulation dans le navigateur : aucun appareil réel n\'est instrumenté. La majorité des seuils sont de vraies tolérances publiées (AAPM, ACR). Un vrai système demanderait des capteurs ou une lecture d\'écran par caméra, et un serveur pour recevoir les données.'],
+    ['8. Coût des capteurs réels', 'Les prix cités viennent de recherches ponctuelles sur des distributeurs généralistes, pas de devis biomédicaux ni de catalogues de fabricants. Plusieurs postes sont marqués « non trouvé » plutôt que remplacés par un chiffre inventé.'],
+    ['9. Contraintes techniques', 'Cette copie est un site statique : pas de base de données ni de serveur. L\'état de la démonstration (lectures, alertes, demandes) est gardé dans le navigateur de chaque visiteur et peut être réinitialisé. Aucune donnée personnelle ou médicale réelle n\'est stockée.']
+  ];
+  var h = '<div class="card" style="border-left:4px solid var(--amber);margin-bottom:20px;">Cette page liste honnêtement les limites de chaque partie du site. Elles tiennent à deux causes : un stage d\'observation ne donne pas accès aux systèmes internes des fabricants ni à de vraies données patient, et ce site est un projet étudiant, pas un développement validé par un déploiement hospitalier.</div><div class="grid grid-2">' +
+    items.map(function (i) { return '<div class="card"><div class="section-title" style="margin-top:0;">' + esc(i[0]) + '</div><p>' + esc(i[1]) + '</p></div>'; }).join('') + '</div>';
+  return wrap('Contraintes du projet', 'Les limites de chaque module, présentées telles quelles', h);
+}
+
+/* Routeur et navigation. Aucune connexion : tout est accessible. */
+var NAV = [
+  ['#/', 'Accueil', '★', 'accueil'],
+  ['#/dashboard', 'Tableau de bord', '◆', 'dashboard'],
+  ['#/equipements', 'Équipements', '▤', 'equipements'],
+  ['#/interventions', 'Historique', '↻', 'interventions'],
+  ['#/checklists', 'Checklists / Qualification', '☑', 'checklists'],
+  ['#/demandes', 'Demandes d\'intervention', '✉', 'demandes'],
+  ['#/monitoring/2', 'Monitoring continu', '◉', 'monitoring'],
+  ['#/alertes', 'Historique des alertes', '⏱', 'alertes'],
+  ['#/cout', 'Coût capteurs réels', '¤', 'cout'],
+  ['#/image', 'Analyse d\'image', '◐', 'image'],
+  ['#/prediction', 'Prédiction', '✦', 'prediction'],
+  ['#/suite', 'Suite du projet', '➜', 'suite'],
+  ['#/contraintes', 'Contraintes', '⚠', 'contraintes']
+];
+
+function navHtml(cur) {
+  return NAV.map(function (n) {
+    var actif = n[3] === cur || (cur === 'equipement' && n[3] === 'equipements');
+    return '<a class="' + (actif ? 'active' : '') + '" href="' + n[0] + '">' + n[2] + ' ' + n[1] + '</a>';
+  }).join('');
+}
+
+var CURRENT = null;
+function go(h) {
+  CURRENT = h;
+  try { history.replaceState(null, '', h); } catch (e) { /* aperçu sans historique : on garde la page en mémoire */ }
+  route();
+}
+
+function route() {
+  stopMonTimer();
+  var hash = (CURRENT || location.hash || '#/').replace(/^#\/?/, '');
+  var parts = hash.split('/');
+  var page = parts[0] || 'accueil';
+  var html = '', after = null, cur = page;
+  switch (page) {
+    case 'accueil': html = pageAccueil(); break;
+    case 'dashboard': html = pageDashboard(); break;
+    case 'equipements': html = pageEquipements(); after = initEquipements; break;
+    case 'equipement':
+      var id = parseInt(parts[1], 10), tab = parts[2] || 'fiche';
+      html = pageEquipement(id, tab); after = function () { initEquipement(id, tab); }; break;
+    case 'interventions': html = pageInterventions(); break;
+    case 'checklists': html = pageChecklists(); break;
+    case 'demandes': html = pageDemandes(); after = initDemandes; break;
+    case 'monitoring':
+      var m = MON_IDS.indexOf(parts[1]) >= 0 ? parts[1] : '2';
+      html = pageMonitoring(m); after = function () { startMonTimer(m); }; break;
+    case 'alertes': html = pageAlertes(); after = initAlertes; break;
+    case 'cout': html = pageCout(); break;
+    case 'image': html = pageImage(); after = initImagePage; break;
+    case 'prediction': html = pagePrediction(); after = initPredPage; break;
+    case 'suite': html = pageSuite(); break;
+    case 'contraintes': html = pageContraintes(); break;
+    default: html = wrap('Page introuvable', '', '<p>Cette page n\'existe pas. <a href="#/">Retour à l\'accueil</a>.</p>'); cur = '';
+  }
+  document.getElementById('nav').innerHTML = navHtml(cur);
+  document.getElementById('view').innerHTML = html;
+  window.scrollTo(0, 0);
+  if (after) after();
+}
+
+window.addEventListener('hashchange', function () { CURRENT = null; route(); });
+document.addEventListener('click', function (e) {
+  var a = e.target.closest ? e.target.closest('a[href^="#/"]') : null;
+  if (!a) return;
+  e.preventDefault();
+  go(a.getAttribute('href'));
+});
+document.addEventListener('DOMContentLoaded', function () { initMonitoring(); route(); });
+
+
+</script>
+</body>
+</html>
